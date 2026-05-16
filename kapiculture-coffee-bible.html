@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Coffee Bible — Kapiculture</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0d0b09;
+  --deep: #141210;
+  --card: #1a1714;
+  --border: rgba(255,255,255,0.07);
+  --coffee: #6B3A2A;
+  --coffee-light: #A0522D;
+  --gold: #C9993A;
+  --cream: #F2E8D5;
+  --muted: #7a706a;
+  --accent: #D4854A;
+  --green: #5C7A4E;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,11,9,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cream); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 8vw 60px;
+  position: relative;
+  background: radial-gradient(ellipse at 20% 80%, rgba(107,58,42,0.25) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(92,122,78,0.1) 0%, transparent 50%),
+              var(--black);
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 22vw, 340px);
+  color: rgba(107,58,42,0.06);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -0.02em;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 9vw, 130px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+  margin-bottom: 32px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 55ch;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.hstat { display: flex; flex-direction: column; gap: 4px; }
+.hstat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.hstat-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* SEASON HEADER */
+.season-header {
+  padding: 80px 8vw 40px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.season-header::before {
+  content: attr(data-num);
+  position: absolute;
+  right: 6vw;
+  bottom: -0.15em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 18vw, 220px);
+  color: rgba(107,58,42,0.07);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.season-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.season-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.season-header h2 em { font-style: italic; color: var(--accent); }
+
+/* SECTION */
+.section {
+  padding: 60px 8vw;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 15px;
+  color: rgba(242,232,213,0.78);
+  line-height: 1.85;
+  margin-bottom: 18px;
+  max-width: 74ch;
+}
+
+strong { color: var(--cream); font-weight: 500; }
+
+/* PULL QUOTE */
+.pq {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.8vw, 32px);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--cream);
+  border-left: 3px solid var(--gold);
+  padding: 20px 36px;
+  margin: 48px 0;
+  background: rgba(107,58,42,0.08);
+  max-width: 68ch;
+}
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 40px 0; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 40px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; margin: 40px 0; }
+
+@media(max-width:720px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card);
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+}
+
+.card-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+.card h4 { color: var(--cream); margin-bottom: 10px; font-size: 13px; }
+.card p { font-size: 13px; margin: 0; line-height: 1.7; }
+
+/* PROCESSING CARD */
+.proc-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 28px;
+}
+.proc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.proc-tag {
+  display: inline-block;
+  background: rgba(160,82,45,0.25);
+  color: var(--accent);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  margin-bottom: 14px;
+}
+.proc-card p { font-size: 13px; margin: 0 0 8px; }
+.proc-detail { color: var(--gold); font-size: 12px; font-family: 'DM Mono', monospace; }
+
+/* ROAST BAR */
+.roast-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+  margin: 40px 0;
+}
+
+.roast-card {
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.roast-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.roast-light { background: rgba(255,230,180,0.05); }
+.roast-light::before { background: #FFE5A0; }
+
+.roast-medium { background: rgba(180,130,80,0.08); }
+.roast-medium::before { background: #C08040; }
+
+.roast-dark { background: rgba(80,40,20,0.15); }
+.roast-dark::before { background: #4A2010; }
+
+.roast-card h4 { font-size: 13px; margin-bottom: 8px; }
+.roast-card p { font-size: 12px; margin: 0; color: var(--muted); }
+.roast-temp {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* BREW TABLE */
+.brew-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 40px 0;
+  font-size: 13px;
+}
+
+.brew-table th {
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.brew-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  color: rgba(242,232,213,0.78);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.brew-table tr:hover td { background: rgba(107,58,42,0.06); }
+
+.brew-method {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+/* RULE BOX */
+.rule-box {
+  background: rgba(201,153,58,0.08);
+  border: 1px solid rgba(201,153,58,0.25);
+  padding: 36px 40px;
+  margin: 32px 0;
+}
+
+.rule-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+/* FAKE ALERT */
+.fake-box {
+  background: rgba(180,50,30,0.1);
+  border: 1px solid rgba(180,50,30,0.3);
+  padding: 32px;
+  margin: 24px 0;
+}
+
+.fake-box h4 { color: #E07060; margin-bottom: 10px; }
+.fake-box p { font-size: 13px; margin: 0; }
+
+/* PERSON CARD */
+.person-card {
+  background: var(--card);
+  padding: 28px;
+  border: 1px solid var(--border);
+}
+
+.person-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.person-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.person-card p { font-size: 13px; margin: 0; }
+
+/* BOOK CARD */
+.book-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+}
+
+.book-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: rgba(107,58,42,0.5);
+  line-height: 1;
+  min-width: 36px;
+}
+
+.book-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 2px;
+}
+
+.book-author {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+}
+
+.book-desc { font-size: 12px; color: var(--muted); margin: 0; }
+
+/* IG FRAMEWORK */
+.ig-box {
+  background: rgba(92,122,78,0.08);
+  border: 1px solid rgba(92,122,78,0.25);
+  padding: 36px 40px;
+  margin: 56px 0;
+}
+
+.ig-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ig-label::before { content: '📱'; }
+
+.ig-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+@media(max-width:720px) { .ig-grid { grid-template-columns: 1fr; } }
+
+.ig-col h5 {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.ig-col p { font-size: 13px; color: rgba(242,232,213,0.75); line-height: 1.65; margin: 0 0 8px; max-width: none; }
+
+.slide-list { list-style: none; padding: 0; }
+.slide-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: rgba(242,232,213,0.7);
+  display: flex;
+  gap: 10px;
+}
+.slide-list li::before {
+  content: attr(data-n);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--green);
+  min-width: 20px;
+}
+
+/* COMPARISON */
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin: 40px 0;
+  align-items: start;
+}
+
+.vs-side {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 32px 28px;
+}
+
+.vs-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+
+.vs-mid {
+  background: rgba(107,58,42,0.2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  min-height: 200px;
+}
+
+.vs-mid span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.vs-side p { font-size: 13px; margin: 0 0 8px; }
+.vs-side .detail {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+}
+
+/* TIMELINE */
+.timeline {
+  padding-left: 28px;
+  border-left: 2px solid rgba(107,58,42,0.4);
+  margin: 40px 0;
+}
+
+.tl-item {
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -34px;
+  top: 7px;
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 2px solid var(--black);
+  box-shadow: 0 0 0 2px rgba(201,153,58,0.3);
+}
+
+.tl-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.tl-item h4 { font-size: 15px; text-transform: none; letter-spacing: 0; margin-bottom: 6px; }
+.tl-item p { font-size: 13px; max-width: 62ch; margin: 0; color: rgba(242,232,213,0.65); }
+
+/* CUPPING TABLE */
+.cupping-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+  margin: 40px 0;
+}
+
+.cupping-attr {
+  background: var(--card);
+  padding: 24px 20px;
+  border: 1px solid var(--border);
+}
+
+.attr-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.cupping-attr p { font-size: 12px; margin: 0; }
+
+/* WAVE CARDS */
+.wave-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+  margin: 40px 0;
+}
+
+.wave-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  position: absolute;
+  right: 16px;
+  bottom: -10px;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+}
+
+.wave-card h4 { font-size: 14px; margin-bottom: 8px; }
+.wave-period {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+.wave-card p { font-size: 13px; margin: 0 0 10px; }
+.wave-brands { font-size: 11px; color: var(--accent); font-style: italic; }
+
+/* TOOL CARDS */
+.tool-card {
+  background: var(--card);
+  padding: 24px 20px;
+  border: 1px solid var(--border);
+}
+
+.tool-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.tool-card p { font-size: 12px; margin: 0 0 6px; }
+.tool-card .why { color: var(--gold); font-family: 'DM Mono', monospace; font-size: 11px; }
+
+/* FOOTER */
+footer {
+  padding: 48px 8vw;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+footer p { font-size: 11px; color: var(--muted); max-width: none; margin: 0; }
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.2em;
+  color: rgba(107,58,42,0.4);
+}
+
+/* ANIMATE */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1, .hero-sub, .hero-stats {
+  animation: fadeUp 0.9s ease both;
+}
+.hero h1 { animation-delay: 0.05s; }
+.hero-sub { animation-delay: 0.15s; }
+.hero-stats { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">KAPICULTURE</div>
+  <ul class="nav-links">
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#processing">Processing</a></li>
+    <li><a href="#roasting">Roasting</a></li>
+    <li><a href="#grinding">Grinding</a></li>
+    <li><a href="#brewing">Brewing</a></li>
+    <li><a href="#culture">Culture</a></li>
+    <li><a href="#tasting">Tasting</a></li>
+    <li><a href="#people">People</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#fakes">Fakes</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="#ig">Instagram</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">COFFEE</div>
+  <div class="hero-eyebrow">Kapiculture · The Complete Reference · 2026</div>
+  <h1>The Coffee <em>Bible</em></h1>
+  <p class="hero-sub">From a Sufi saint smuggling seven seeds in his beard to the 2025 World Barista Championship in Milan — every concept, every technique, every tool, every person. Built for Kapiculture's Instagram, built to last.</p>
+  <div class="hero-stats">
+    <div class="hstat">
+      <span class="hstat-num">10</span>
+      <span class="hstat-label">Content Seasons</span>
+    </div>
+    <div class="hstat">
+      <span class="hstat-num">50+</span>
+      <span class="hstat-label">Post Frameworks</span>
+    </div>
+    <div class="hstat">
+      <span class="hstat-num">400+</span>
+      <span class="hstat-label">Years of history</span>
+    </div>
+    <div class="hstat">
+      <span class="hstat-num">∞</span>
+      <span class="hstat-label">Arguments about espresso</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 1 · ORIGIN
+══════════════════════════════════════════════ -->
+<div id="origin" class="season-header" data-num="01">
+  <div class="season-tag">Season 01</div>
+  <h2>The <em>Origin</em> — Before the Cup Was Invented</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">The Legends</div>
+  <h3>How Coffee Came to Exist</h3>
+
+  <div class="grid-2">
+    <div class="card">
+      <span class="card-icon">🐐</span>
+      <h4>Ethiopia · The Kaldi Legend (~850 AD)</h4>
+      <p>A goat herder named Kaldi in the Kaffa region of Ethiopia noticed his goats dancing at night, refusing to sleep after eating red berries from a certain tree. He brought the berries to a local monastery. A monk threw them into a fire in disapproval — and the first-ever coffee aroma filled the room. The monks brewed the roasted seeds in water and stayed alert through long evening prayers. This story is almost certainly mythology — but its geography is true. Ethiopia is the genetic home of Coffea arabica. The plant is indigenous there. Coffee was not invented anywhere else.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🕌</span>
+      <h4>Yemen · The First Cultivation (15th Century)</h4>
+      <p>Sufi monks in Yemen were the first to deliberately cultivate and brew coffee into a drink — "qahwa" — used during long night vigils and prayers. The port city of Mocha (Al-Mokha) became the world's first coffee export hub. Yemenis were so protective of their monopoly that coffee was exported only in roasted or boiled form — to prevent germination. For almost 200 years, Yemen controlled the entire global supply. Every cup of coffee in the Ottoman Empire, every coffee house in Cairo or Constantinople, ran on Yemeni beans.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🧎</span>
+      <h4>India · Baba Budan's Seven Seeds (1670)</h4>
+      <p>A Sufi saint from Karnataka — Hazrat Baba Budan — was returning from his Hajj pilgrimage when he stopped at the port of Mocha. Captivated by qahwa, he smuggled seven raw coffee seeds out of Yemen, hiding them in his beard. Exporting unroasted coffee was illegal under Yemeni law. He planted those seeds on the Chandragiri Hills of Chikkamagaluru, Karnataka — now known as Baba Budan Giri. From seven seeds grew India's entire coffee industry: 2.8 lakh metric tonnes produced in Karnataka alone in 2025-26. His tomb in those hills is today a syncretic pilgrimage site — sacred to both Hindus and Muslims.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">☕</span>
+      <h4>Europe · The Coffeehouses (17th Century)</h4>
+      <p>Coffee arrived in Europe via Ottoman trade routes. The first European coffeehouse opened in Venice in 1645. By 1700, London had over 2,000 coffeehouses — called "penny universities" because for the price of a penny (the cost of admission, including coffee), any man could sit and engage with intellectuals, merchants, politicians, and philosophers. Lloyd's of London — the world's largest insurance market — started as a coffeehouse. The London Stock Exchange began in a coffeehouse. Modern capitalism was, in a very real sense, brewed in coffee.</p>
+    </div>
+  </div>
+
+  <div class="pq">"Baba Budan didn't just bring coffee to India. He committed an act of industrial espionage that birthed an entire subcontinent's relationship with the most consumed psychoactive substance on earth."</div>
+</section>
+
+<section class="section">
+  <div class="section-label">The Plant</div>
+  <h3>Coffea — The Species Behind the Cup</h3>
+
+  <div class="grid-4">
+    <div class="card">
+      <span class="card-icon">🌿</span>
+      <h4>Coffea Arabica</h4>
+      <p>70% of global coffee. Higher altitude (800–2200m). Lower caffeine, higher acidity, more complex flavour. Susceptible to disease and weather. Ethiopian origin. Varieties: Bourbon, Typica, Heirloom, Gesha/Geisha, SL28, Caturra, Mundo Novo. This is specialty coffee's domain.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💪</span>
+      <h4>Coffea Canephora (Robusta)</h4>
+      <p>30% of global coffee. Lower altitude, more robust, higher caffeine (2x Arabica), earthy, harsh, rubbery when low-quality. Resilient. Used in commercial blends, Italian espresso blends, instant coffee. Vietnamese Robusta can be specialty-grade. Harder to brew well black — often served with sweetened condensed milk.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌸</span>
+      <h4>Coffea Liberica</h4>
+      <p>Very rare. Grown in West Africa, Philippines, Malaysia. Woody, floral, smoky, almost like jackfruit. Used in some Southeast Asian blends. Rarely found outside its origin regions. Considered an acquired taste even by seasoned drinkers.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔬</span>
+      <h4>Coffea Excelsa</h4>
+      <p>Often classified under Liberica. Grown in Southeast Asia. Tart, fruity, complex. Used in blends for depth. Gaining niche interest in the specialty world for its uniqueness. Very limited global production.</p>
+    </div>
+  </div>
+
+  <h3>The Coffee Cherry</h3>
+  <p>Coffee "beans" are not beans at all. They are the seeds of a fruit — the coffee cherry. Understanding the cherry is understanding why processing decisions matter so profoundly for taste.</p>
+
+  <div class="grid-4">
+    <div class="card">
+      <span class="card-icon">🍒</span>
+      <h4>Outer Skin (Exocarp)</h4>
+      <p>The red (or yellow, orange, purple) outer skin. Removed during processing. Color at harvest determines ripeness. Only fully red cherries should be picked for specialty — even one underripe cherry in a batch degrades the cup.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🫐</span>
+      <h4>Pulp (Mesocarp)</h4>
+      <p>Sweet, fruit-forward, sugary layer directly beneath the skin. In natural processing, this pulp ferments against the bean and transfers its fruity sweetness into the final cup. In washed processing, it is removed entirely by machine.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔮</span>
+      <h4>Mucilage</h4>
+      <p>A sticky, gummy layer between pulp and parchment. Crucial to honey processing — how much mucilage is left on the bean determines whether the honey is yellow, red, or black. Contains complex sugars that ferment into flavour compounds.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">📜</span>
+      <h4>Parchment + Silver Skin + Bean</h4>
+      <p>The parchment (endocarp) protects the actual green bean during drying. Inside it: the silver skin (chaff), which burns off during roasting. And finally, the two flat-sided seeds — the green coffee beans — each with its own distinct cell structure that will determine how it roasts.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">The Waves</div>
+  <h3>Four Waves — Coffee's Cultural Evolution</h3>
+
+  <div class="wave-grid">
+    <div class="wave-card">
+      <div class="wave-num">1</div>
+      <h4>First Wave</h4>
+      <div class="wave-period">1800s–1960s</div>
+      <p>Coffee as commodity. Mass production. The goal: caffeine delivery, not flavour. Dark roasts to hide defects. Canned, pre-ground, instant. Shelf life over taste.</p>
+      <div class="wave-brands">Folgers · Maxwell House · Nescafé · Bru (India) · Tata Coffee</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">2</div>
+      <h4>Second Wave</h4>
+      <div class="wave-period">1966–2000s</div>
+      <p>Coffee as experience and lifestyle. Origin awareness begins. Espresso culture goes mainstream in the West. Flavored drinks, dairy-heavy, dark Italian roasts. Consumer pays premium for atmosphere, not bean quality.</p>
+      <div class="wave-brands">Starbucks · Peet's · Costa · Café Coffee Day (India) · Barista Lavazza</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">3</div>
+      <h4>Third Wave</h4>
+      <div class="wave-period">2000s–2020s</div>
+      <p>Coffee as craft and terroir. Origin transparency. Light roasts to showcase bean character. Direct trade. Single origins. The barista as skilled professional. The cup scored scientifically. WBC becomes major platform.</p>
+      <div class="wave-brands">Blue Bottle · Stumptown · Intelligentsia · Counter Culture · Blue Tokai · Third Wave Coffee · Subko · Corridor Seven (India)</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">4</div>
+      <h4>Fourth Wave (Emerging)</h4>
+      <div class="wave-period">2020s–</div>
+      <p>Coffee as science. Anaerobic fermentation. Precision extraction. Water chemistry as variable. AI-assisted roasting. Lab-grade measurement at home (refractometers, Bluetooth scales, pressure profiling). Experimental processing.</p>
+      <div class="wave-brands">Onyx Coffee Lab · Proud Mary · Decent Espresso · Acaia · Weber Workshops</div>
+    </div>
+  </div>
+</section>
+
+<!-- IG FRAMEWORK S1 -->
+<section class="section" id="ig-s1">
+  <div class="ig-box">
+    <div class="ig-label">Instagram Content Framework — Season 1: Origin</div>
+    <div class="ig-grid">
+      <div class="ig-col">
+        <h5>Carousel #1 — Baba Budan (Beginner)</h5>
+        <ul class="slide-list">
+          <li data-n="S1">India's coffee started with a smuggler</li>
+          <li data-n="S2">Who was Baba Budan?</li>
+          <li data-n="S3">The Yemen monopoly — why it mattered</li>
+          <li data-n="S4">7 seeds, hidden in his beard</li>
+          <li data-n="S5">Chandragiri Hills → Baba Budan Giri</li>
+          <li data-n="S6">From 7 seeds to 2.8 lakh MT per year</li>
+          <li data-n="S7">His tomb — where Hindus & Muslims pray together</li>
+          <li data-n="S8">What grows there today</li>
+          <li data-n="S9">If you've had Indian filter coffee, it starts here</li>
+          <li data-n="S10">Save this · Follow Kapiculture</li>
+        </ul>
+      </div>
+      <div class="ig-col">
+        <h5>Reel Hook — 4 Waves (Intermediate)</h5>
+        <p><strong>Hook (0–2s):</strong> "You've never really had coffee until the 3rd wave. Here's what that means."</p>
+        <p><strong>Body:</strong> Quick visual comparison — 1st wave (Nescafé tin), 2nd wave (Starbucks cup), 3rd wave (V60 pour), 4th wave (refractometer reading).</p>
+        <p><strong>Voiceover points:</strong> Each wave's defining belief. What changed. Why it matters to your cup right now.</p>
+        <p><strong>CTA:</strong> "Which wave are you in? Comment below."</p>
+      </div>
+      <div class="ig-col">
+        <h5>Caption Template — The Plant</h5>
+        <p><strong>Hook:</strong> "The coffee 'bean' is not a bean. It's a seed. And it grows inside a fruit."</p>
+        <p><strong>Body:</strong> Arabica vs Robusta in 4 lines. Why species matters for your cup. Which one is in your bag right now.</p>
+        <p><strong>Hashtags:</strong> #SpecialtyCoffee #CoffeeIndia #Kapiculture #CoffeeFarm #CoffeeOrigin #BabaBudan #IndianCoffee #ThirdWave #CoffeeEducation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 2 · PROCESSING
+══════════════════════════════════════════════ -->
+<div id="processing" class="season-header" data-num="02">
+  <div class="season-tag">Season 02</div>
+  <h2>Cherry to <em>Green Bean</em> — The Processing Methods</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">Harvesting First</div>
+  <h3>How Cherries Are Picked — It Changes Everything</h3>
+
+  <div class="grid-2">
+    <div class="card">
+      <span class="card-icon">✋</span>
+      <h4>Selective Hand Picking</h4>
+      <p>Pickers go through each tree multiple times (2–3 passes per season) selecting only fully ripe red cherries. Labour-intensive, expensive, but produces the most consistent quality. Standard in specialty coffee and high-altitude farms. What you pay a premium for.</p>
+      <div style="margin-top:10px; font-family:'DM Mono',monospace; font-size:11px; color:var(--gold);">Used in: Ethiopia · Colombia · Panama · India (specialty estates)</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">👐</span>
+      <h4>Strip Picking</h4>
+      <p>All cherries — ripe, unripe, overripe — stripped from branches in one pass. Fast and cheap. Results in uneven quality. Green, red, and black cherries all end up together, creating defects in the final cup. Standard in large commodity farms.</p>
+      <div style="margin-top:10px; font-family:'DM Mono',monospace; font-size:11px; color:var(--gold);">Used in: Brazil commodity · commercial farms globally</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🚜</span>
+      <h4>Machine Harvesting</h4>
+      <p>Large mechanical harvesters shake tree trunks or branches. Only feasible on flat terrain (Brazil's vast Cerrado plains). Extremely efficient for commodity scale — devastating for quality. Ripe and unripe together. The opposite philosophy from specialty.</p>
+      <div style="margin-top:10px; font-family:'DM Mono',monospace; font-size:11px; color:var(--gold);">Used in: Brazil large-scale farms</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📊</span>
+      <h4>Density Sorting (Post-Harvest)</h4>
+      <p>Cherries float in water — fully ripe (denser) sink, defective or unripe ones float. Called "flotation sorting." Removes a significant proportion of defects before processing begins. A simple, ancient technique that dramatically improves floor quality even before any processing decision is made.</p>
+      <div style="margin-top:10px; font-family:'DM Mono',monospace; font-size:11px; color:var(--gold);">Used in: most specialty operations as a quality gate</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">The Processing Methods</div>
+  <h3>Six Ways to Turn a Cherry into a Green Bean</h3>
+
+  <div class="grid-2">
+    <div class="proc-card">
+      <div class="proc-name">Natural / Dry Process</div>
+      <span class="proc-tag">Oldest Method</span>
+      <p>Whole cherries — skin, pulp, mucilage and all — are spread on raised drying beds or patios and left to dry in the sun for 3–6 weeks. The bean sits inside the fermenting, drying fruit the entire time, absorbing its sugars and fruit compounds through the cell wall.</p>
+      <p><strong>Flavour result:</strong> Heavy, wine-like, fruity, boozy, blueberry, tropical fruit, full body. Inconsistent by nature — prone to over-fermentation if not turned constantly.</p>
+      <div class="proc-detail">Origin: Ethiopia, Yemen → now global</div>
+      <div class="proc-detail">Risk: Rot and defects if rain or humidity interrupts drying</div>
+      <div class="proc-detail">Famous for: Ethiopian naturals (Yirgacheffe, Sidama), Brazilian naturals</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-name">Washed / Wet Process</div>
+      <span class="proc-tag">Cleanest Cup</span>
+      <p>Skin and pulp are mechanically removed immediately after harvest. The bean (still in parchment, covered in mucilage) is then soaked in fermentation tanks for 12–72 hours. Fermentation breaks down the remaining mucilage enzymatically. The beans are then washed clean with fresh water and dried.</p>
+      <p><strong>Flavour result:</strong> Clean, bright, high acidity, fruit clarity, transparent — you taste the bean's intrinsic character most directly. The terroir of origin is most legible.</p>
+      <div class="proc-detail">Origin: Developed in Central America, perfected in East Africa</div>
+      <div class="proc-detail">Famous for: Kenyan washed, Yirgacheffe washed, Colombian</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-name">Honey Process</div>
+      <span class="proc-tag">Spectrum of Styles</span>
+      <p>A hybrid between natural and washed. Skin is removed (like washed) but varying amounts of mucilage are deliberately left on the bean (like natural), which then dries on the parchment. How much mucilage is retained determines the "colour" of the honey:</p>
+      <p><strong>Yellow Honey:</strong> 75–90% mucilage removed, quick drying. Subtle sweetness, clean.</p>
+      <p><strong>Red Honey:</strong> 50–75% removed, slower drying. More fruity, caramel notes.</p>
+      <p><strong>Black Honey:</strong> Only 10–25% removed, very slow drying (30+ days). Closest to natural. Rich, complex, jammy, intense sweetness.</p>
+      <div class="proc-detail">Origin: Costa Rica (pioneered), now Central America-wide</div>
+      <div class="proc-detail">Risk: Requires precise weather control to avoid fermentation runaway</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-name">Anaerobic Fermentation</div>
+      <span class="proc-tag">4th Wave / Experimental</span>
+      <p>Cherries or depulped beans are sealed in airtight tanks with no oxygen. CO₂ builds up from natural fermentation, creating a unique pressure and chemical environment. Fermentation time: 24–200+ hours depending on desired profile. Produces radically unique, often polarising flavours — lactic acid notes, wine, funk, tropical intensity.</p>
+      <p><strong>Flavour result:</strong> Wild, intense, fermented-fruity, often described as "funky" or "boozy." Designed to stand out, not blend in.</p>
+      <div class="proc-detail">Famous for: Sasa Sestic's 2015 WBC-winning coffee, now widespread in specialty</div>
+      <div class="proc-detail">Risk: Easy to go from "complex" to "defective" — precision required</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-name">Wet-Hulled / Giling Basah</div>
+      <span class="proc-tag">Uniquely Indonesian</span>
+      <p>Specific to Indonesia (Sumatra, Sulawesi, Flores). Cherries are partially washed, then the parchment is removed while the bean still has very high moisture content (35–50%). This exposed, naked bean then continues drying. The process creates distinctive earthy, herbal, low-acid, full-body flavours entirely unlike any other origin.</p>
+      <p><strong>Flavour result:</strong> Earthy, musty (in a good way), cedar, tobacco, low acidity, heavy body. Very distinctive. Often used in espresso blends for depth.</p>
+      <div class="proc-detail">Why this method: High humidity in Indonesia makes full drying impractical. Giling Basah developed as a practical solution.</div>
+    </div>
+    <div class="proc-card">
+      <div class="proc-name">Monsooned / Malabar</div>
+      <span class="proc-tag">India's Gift</span>
+      <p>A uniquely Indian process specific to the Malabar Coast (Karnataka/Kerala). Green beans are stored in open warehouses during the monsoon season (June–September) and exposed to warm, moist monsoon winds for 12–16 weeks. The beans swell, turn pale golden/yellow, lose much of their acidity, and develop an entirely unique character.</p>
+      <p><strong>Flavour result:</strong> Near-zero acidity, extremely full body, pungent, spicy, musty, almost like aged wine. Loves milk. Critical component of classic South Indian filter coffee blends.</p>
+      <div class="proc-detail">GI tag: Monsooned Malabar has an official Geographical Indication (GI) tag</div>
+      <div class="proc-detail">Key estate regions: Chikkamagaluru, Coorg, Wayanad</div>
+    </div>
+  </div>
+
+  <div class="ig-box">
+    <div class="ig-label">Instagram Content Framework — Season 2: Processing</div>
+    <div class="ig-grid">
+      <div class="ig-col">
+        <h5>Carousel — Natural vs Washed vs Honey (Beginner)</h5>
+        <ul class="slide-list">
+          <li data-n="S1">Same bean. 3 different coffees.</li>
+          <li data-n="S2">Natural: The whole fruit dries together</li>
+          <li data-n="S3">Tasting it: blueberries, wine, tropical</li>
+          <li data-n="S4">Washed: The fruit is removed immediately</li>
+          <li data-n="S5">Tasting it: clean, bright, citrus, floral</li>
+          <li data-n="S6">Honey: somewhere in between (3 types)</li>
+          <li data-n="S7">Which one is "better"? Wrong question.</li>
+          <li data-n="S8">What's in your bag right now?</li>
+        </ul>
+      </div>
+      <div class="ig-col">
+        <h5>Reel Hook — Monsooned Malabar (Indian, Intermediate)</h5>
+        <p><strong>Hook:</strong> "India has a processing method that exists nowhere else on earth. Here's what happens when coffee beans sit in monsoon winds for 4 months."</p>
+        <p><strong>Visuals:</strong> Monsoon rains, pale golden beans, filter coffee being pulled through a dabarah.</p>
+        <p><strong>Closing line:</strong> "The coffee in your South Indian filter? This is why it tastes like that."</p>
+      </div>
+      <div class="ig-col">
+        <h5>Carousel — Anaerobic (Expert)</h5>
+        <p>Cover: "The most controversial process in coffee right now."</p>
+        <p>Explain the sealed tank, CO2 pressure, fermentation science.</p>
+        <p>What it produces. Why some love it. Why purists hate it.</p>
+        <p>Famous examples: Sasa Sestic 2015 WBC.</p>
+        <p>End with: "Tried one? Tell us in comments."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 3 · ROASTING
+══════════════════════════════════════════════ -->
+<div id="roasting" class="season-header" data-num="03">
+  <div class="season-tag">Season 03</div>
+  <h2>The <em>Roast</em> — Chemistry, Heat, and the Maillard Secret</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">The Science</div>
+  <h3>What Actually Happens Inside the Drum</h3>
+
+  <p>A green coffee bean is grassy, dense, and largely flavourless. Put it through 7–14 minutes of precisely controlled heat and it becomes one of the most chemically complex foods on earth — with over 1,000 volatile aromatic compounds. Here is the journey:</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">Phase 1 · Drying (0–4 min · 0–160°C)</div>
+      <h4>Moisture Evaporation</h4>
+      <p>Green beans contain 8–12% moisture. The first phase drives this out. The drum heats the beans — they feel and look almost the same, still green, turning slightly yellow. No aroma yet. The roaster charges the drum and watches bean temperature. Endothermic phase — beans are absorbing heat, not releasing it.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Phase 2 · Maillard Reaction (~150–170°C)</div>
+      <h4>The Browning Begins</h4>
+      <p>The Maillard reaction is the same chemical process that browns bread, sears steak, and caramelises onions. Reducing sugars react with amino acids under heat. Hundreds of new flavour and aroma compounds are created. The beans turn from yellow to tan to brown. The roastery fills with aroma. This phase determines most of the cup's complexity — and where roasters spend the most attention.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Phase 3 · First Crack (~196°C)</div>
+      <h4>The Bean Expands and Pops</h4>
+      <p>As internal cell pressure builds from steam and CO₂, the beans crack open audibly — a sharp, popcorn-like sound. First crack marks the transition from endothermic to exothermic. This is technically the minimum for drinkable coffee — and where most specialty light roasts stop. Sugars are caramelising. Acidity is at its highest. Sweetness is developing. The origin character of the bean is most legible here.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Phase 4 · Development Time (Post-First Crack)</div>
+      <h4>Where the Roaster Makes Decisions</h4>
+      <p>After first crack, the roaster has a short window — typically 1–3 minutes — to decide how much "development" to give the coffee. More development = more body, less acidity, more bittersweet complexity. Less development = more brightness, higher acidity, fruit-forward, origin clarity. This is the single most consequential decision in roasting. Temperature, time, and airflow all matter here.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">Phase 5 · Second Crack (~225°C)</div>
+      <h4>Dark Roast Territory — Oils Emerge</h4>
+      <p>A second, quieter crack as cell walls fracture further. Oils migrate to the bean surface (visible shine). Origin character is now largely obliterated — all coffees begin to taste more like "roast" than like where they came from. Sugars are burning. Acidity collapses. Body becomes heavier, more bitter. This is Italian espresso territory and commercial dark roast. Not worse — just a different philosophy.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Roast Levels</div>
+  <h3>The Spectrum from Light to Dark</h3>
+
+  <div class="roast-row">
+    <div class="roast-card roast-light">
+      <div class="roast-temp" style="color:#FFD080">196°C</div>
+      <h4>Light Roast</h4>
+      <p>Just after first crack ends. Dry, matte surface. No oils visible. Highest acidity. Fruit-forward, floral, tea-like. Origin is paramount — a poor bean cannot hide. Best brewed as pour over, filter, AeroPress. Specialty's domain. Very forgiving of water quality, very unforgiving of low-quality beans.</p>
+      <div style="margin-top:8px; font-family:'DM Mono',monospace; font-size:10px; color:#FFD080;">Examples: Ethiopian Yirgacheffe · Kenyan AA · Panamanian Gesha</div>
+    </div>
+    <div class="roast-card roast-medium">
+      <div class="roast-temp" style="color:#C08040">210°C</div>
+      <h4>Medium Roast</h4>
+      <p>Between first and second crack. No surface oils. Balance of acidity and body. Caramel sweetness. Fruit notes persist but mellow. Most versatile — works for espresso, pour over, drip, AeroPress. The default for specialty cafes trying to serve multiple brew methods without rebelling.</p>
+      <div style="margin-top:8px; font-family:'DM Mono',monospace; font-size:10px; color:#C08040;">Examples: Colombian · Brazilian · Costa Rican · most Indian specialty</div>
+    </div>
+    <div class="roast-card roast-dark">
+      <div class="roast-temp" style="color:#8a5a3a">225°C</div>
+      <h4>Medium-Dark Roast</h4>
+      <p>Approaching second crack. Some surface oils. Dark chocolate, caramel, roast notes dominate. Acidity reduced. Body increases. Classic Italian espresso range. Good for milky drinks — holds up to steamed milk without disappearing. French press territory.</p>
+      <div style="margin-top:8px; font-family:'DM Mono',monospace; font-size:10px; color:#8a5a3a;">Examples: Viennese · Full City · Italian-style blends</div>
+    </div>
+    <div class="roast-card roast-dark">
+      <div class="roast-temp" style="color:#5a2010">230°C+</div>
+      <h4>Dark Roast</h4>
+      <p>Into second crack and beyond. Heavy surface oils (shiny beans). Bitter, smoky, charcoal, tobacco, bittersweet chocolate. Origin character essentially gone — you taste the roaster's hand, not the farm. Forgiving of bad beans. Classic café au lait, commercial espresso blends, French roast.</p>
+      <div style="margin-top:8px; font-family:'DM Mono',monospace; font-size:10px; color:#5a2010;">Examples: French Roast · Italian Roast · Espresso blends (commercial)</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Post-Roast — What Happens Next</div>
+  <h3>The Rest Period, Degassing, and Storage</h3>
+
+  <p>Roasting doesn't end when the beans leave the drum. A roasted coffee bean is alive with CO₂ — the gas produced during the roasting process. This CO₂ needs to escape (degas) before the coffee is ready to brew. This is why properly roasted coffee bags have one-way valves — CO₂ can escape out, oxygen cannot get in.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-icon">🫧</span>
+      <h4>Degassing Period</h4>
+      <p><strong>Light roasts:</strong> 5–10 days before peak. <strong>Medium:</strong> 3–7 days. <strong>Dark:</strong> 1–3 days (degasses faster). Using coffee too soon after roasting creates over-gassed espresso — uneven extraction, large uneven crema, unstable pressure. Barista shops rest their espresso beans for 5–14 days post-roast before serving.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">📦</span>
+      <h4>Storage Rules</h4>
+      <p>The enemies of roasted coffee: oxygen, light, heat, moisture. Store in: airtight container with one-way valve, away from sunlight, at room temperature. <strong>Do not refrigerate</strong> — condensation when you take the container out ruins beans. Freeze only if unopened and sealed airtight for long-term storage (whole beans only).</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⏳</span>
+      <h4>Peak Window & Freshness</h4>
+      <p>Specialty coffee is at its best 7–21 days post-roast for espresso, 5–14 days for filter. After 4–6 weeks: flavour begins degrading noticeably. After 3 months: stale. This is the fundamental problem with supermarket coffee — "best before" dates can be 18 months from roast date. By the time it reaches you, it is already old.</p>
+    </div>
+  </div>
+
+  <h3>Famous Roasters — Global & India</h3>
+
+  <div class="grid-4">
+    <div class="card">
+      <h4>Square Mile Coffee (UK)</h4>
+      <p>Founded by 2007 World Barista Champion James Hoffmann. London's most influential roaster. Pioneered transparency and direct sourcing in the UK market.</p>
+    </div>
+    <div class="card">
+      <h4>Tim Wendelboe (Norway)</h4>
+      <p>Norway. Former WBC champion. One of the most technically precise roasters on earth. His Oslo cafe is considered a pilgrimage site for coffee professionals.</p>
+    </div>
+    <div class="card">
+      <h4>Intelligentsia (USA)</h4>
+      <p>Chicago. Key third-wave pioneer. Coined "direct trade." Some of the most influential direct-sourcing relationships in specialty coffee history.</p>
+    </div>
+    <div class="card">
+      <h4>Stumptown (USA)</h4>
+      <p>Portland, Oregon. Major role in making specialty coffee accessible. Hair Bender blend remains one of the most referenced blends in the third wave.</p>
+    </div>
+    <div class="card">
+      <h4>Blue Tokai (India)</h4>
+      <p>India's most prominent specialty roaster. Works directly with Indian estates (Coorg, Araku, Chikkamagaluru). Brought proper specialty roasting to the Indian urban market.</p>
+    </div>
+    <div class="card">
+      <h4>Third Wave Coffee (India)</h4>
+      <p>Rapid national expansion. Focused on making specialty coffee accessible across Indian cities. Produces single-origin Indian estate coffees alongside blends.</p>
+    </div>
+    <div class="card">
+      <h4>Subko (India)</h4>
+      <p>Mumbai-based. Art-forward, design-conscious. Focused on India's estate coffees with a very strong brand identity. Premium positioning, export focus.</p>
+    </div>
+    <div class="card">
+      <h4>Onyx Coffee Lab (USA)</h4>
+      <p>Arkansas. Won multiple Roaster of the Year awards. Precision-focused, 4th wave mentality. Some of the most consistent quality scores in the US specialty market.</p>
+    </div>
+  </div>
+
+  <div class="ig-box">
+    <div class="ig-label">Instagram Content Framework — Season 3: Roasting</div>
+    <div class="ig-grid">
+      <div class="ig-col">
+        <h5>Carousel — Light vs Dark Roast (Beginner)</h5>
+        <ul class="slide-list">
+          <li data-n="S1">Stop picking coffee by roast date. Pick by roast level.</li>
+          <li data-n="S2">Light roast: what it actually means</li>
+          <li data-n="S3">What you taste in a light roast</li>
+          <li data-n="S4">Dark roast: the full chemistry</li>
+          <li data-n="S5">Dark ≠ stronger. Caffeine myth busted.</li>
+          <li data-n="S6">Which roast for which brew method</li>
+          <li data-n="S7">The freshness problem: roast date matters</li>
+          <li data-n="S8">Check the roast date on your bag right now</li>
+        </ul>
+      </div>
+      <div class="ig-col">
+        <h5>Reel Hook — First Crack (Expert)</h5>
+        <p><strong>Hook (0–2s):</strong> Audio of first crack with text: "This sound means your coffee just became coffee."</p>
+        <p><strong>Explain:</strong> What first crack is. Why it matters. What happens if you stop here vs continue.</p>
+        <p><strong>Closing:</strong> "Development time is where the roaster earns their money."</p>
+      </div>
+      <div class="ig-col">
+        <h5>Post — Degassing (Intermediate)</h5>
+        <p><strong>Single image:</strong> Coffee bag with one-way valve, close-up.</p>
+        <p><strong>Caption:</strong> "The valve on your coffee bag isn't decoration. It's science." Explain degassing in 5 lines. Rule: Never brew espresso beans fresher than 5 days post-roast.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 4 · GRINDING
+══════════════════════════════════════════════ -->
+<div id="grinding" class="season-header" data-num="04">
+  <div class="season-tag">Season 04</div>
+  <h2>The <em>Grind</em> — Why the Mill Matters More Than the Machine</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">Grinder Types</div>
+  <h3>Blade vs Burr — Not Even a Real Debate</h3>
+
+  <div class="fake-box">
+    <h4>❌ Blade Grinder — Do Not Use for Specialty Coffee</h4>
+    <p>A blade grinder chops coffee randomly, like a blender. The result is a mix of particle sizes — some powder-fine, some boulder-large — that extract at wildly different rates in the same brew. Over-extraction and under-extraction in the same cup. The friction also generates heat, which damages volatile aromatics. There is no setting for coarse or fine — just "how long you hold the button." This is not grinding. This is destroying coffee.</p>
+  </div>
+
+  <p>Burr grinders use two abrasive surfaces (burrs) to crush beans into a consistent particle size. The gap between the burrs determines the grind size. All quality grinding — home or commercial — uses burrs.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <span class="card-icon">💿</span>
+      <h4>Flat Burr Grinders</h4>
+      <p>Two parallel disc-shaped burrs facing each other. Coffee is forced through the gap and exits sideways. Produces highly uniform, consistent particle sizes. Creates a "bimodal" distribution — excellent clarity and brightness in the cup. The EK43 (Mahlkönig) is the most famous flat burr grinder in the world. Tends to produce cleaner, brighter, more analytical cups. Preferred for filter/pour-over in professional settings.</p>
+      <div style="margin-top:10px; font-family:'DM Mono',monospace; font-size:11px; color:var(--gold);">Notable: Mahlkönig EK43 · EK43S · Mythos One/Two · Weber EG-1 · Lagom P64</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔺</span>
+      <h4>Conical Burr Grinders</h4>
+      <p>A cone-shaped inner burr spins inside a ring-shaped outer burr. Coffee moves down through the gap by gravity. Produces a slightly more varied particle distribution — creates a fuller body and more complex sweetness. Generally more forgiving for espresso. Runs cooler and quieter than flat burrs. The Comandante C40 (hand grinder) is the most celebrated conical burr in the world.</p>
+      <div style="margin-top:10px; font-family:'DM Mono',monospace; font-size:11px; color:var(--gold);">Notable: Comandante C40 · Niche Zero · 1Zpresso JX-Pro · Baratza Encore · Fellow Ode Gen 2</div>
+    </div>
+  </div>
+
+  <h3>Grind Size — The Spectrum</h3>
+
+  <table class="brew-table">
+    <thead>
+      <tr>
+        <th>Grind Size</th>
+        <th>Method</th>
+        <th>Visual Reference</th>
+        <th>Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="brew-method">Extra Fine</div></td>
+        <td>Turkish / Ibrik</td>
+        <td>Flour, almost powder</td>
+        <td>No filter — the sediment itself is part of the cup. Extremely high surface area.</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Fine</div></td>
+        <td>Espresso</td>
+        <td>Table salt</td>
+        <td>High pressure (9 bars) pushes water through in 25–30 seconds. Too coarse = under-extraction. Too fine = choking the machine.</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Fine–Medium</div></td>
+        <td>Moka Pot / AeroPress</td>
+        <td>Between salt and sand</td>
+        <td>Lower pressure than espresso, shorter contact time, needs finer particle than pour over.</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Medium</div></td>
+        <td>V60 / Chemex / Kalita / Drip</td>
+        <td>Granulated sugar / fine sand</td>
+        <td>Paper filter slows water. Medium grind allows complete, even extraction in 2–4 minutes pour time.</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Coarse</div></td>
+        <td>French Press</td>
+        <td>Sea salt / coarse sand</td>
+        <td>4-minute full immersion. Metal filter allows oils and fines through. Coarse grind prevents sludge.</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Extra Coarse</div></td>
+        <td>Cold Brew</td>
+        <td>Raw sugar / peppercorn</td>
+        <td>12–24 hours of cold-water extraction. Very slow, requires very coarse grind to not over-extract.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Grinder Guide — Home & Commercial</h3>
+
+  <h4 style="margin-top:32px; letter-spacing:0.1em; font-size:12px; color:var(--gold);">HAND GRINDERS (Best value entry point)</h4>
+  <div class="grid-4">
+    <div class="tool-card">
+      <div class="tool-name">Comandante C40 MK4</div>
+      <p>German engineering. Nitro Blade steel burrs. The benchmark hand grinder globally. Produces exceptional cups for both filter and espresso. Expensive but lasts a decade.</p>
+      <div class="tool why">~₹18,000–22,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">1Zpresso JX-Pro / X-Ultra</div>
+      <p>Taiwanese. Outstanding value. Magnetic catch cup, easy adjustment, very consistent. JX-Pro for filter, X-Ultra approaches pro espresso grind quality. Serious competition to Comandante at lower price.</p>
+      <div class="tool why">~₹8,000–16,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Timemore C3 / C2</div>
+      <p>Chinese. Best entry-level hand grinder. Good enough for filter and a decent AeroPress espresso. The C3 Pro Max has stepped adjustment. For someone entering specialty — this is the gateway drug.</p>
+      <div class="tool why">~₹3,500–6,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Porlex Mini</div>
+      <p>Japanese. Compact, ceramic burrs. Fits inside an AeroPress. The travel grinder of choice for serious coffee travellers. Not exceptional, but reliable and small.</p>
+      <div class="tool why">~₹5,000–7,000</div>
+    </div>
+  </div>
+
+  <h4 style="margin-top:32px; letter-spacing:0.1em; font-size:12px; color:var(--gold);">ELECTRIC HOME GRINDERS</h4>
+  <div class="grid-4">
+    <div class="tool-card">
+      <div class="tool-name">Niche Zero</div>
+      <p>British. Single-dose (no retention). 63mm conical burr. Exceptionally clean grind. Near-zero retention means no stale coffee mixing in. The home espresso enthusiast's grinder of choice in 2024–25.</p>
+      <div class="tool why">~₹55,000–65,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Fellow Ode Gen 2</div>
+      <p>American. Flat burrs. Designed explicitly for filter — NOT espresso. Excellent for V60/Chemex/French Press. Beautiful design. Single-dose, low retention.</p>
+      <div class="tool why">~₹35,000–45,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Baratza Encore / Virtuoso+</div>
+      <p>American. The long-standing entry-level electric recommendation. Not single-dose. Decent for filter. Virtuoso+ steps up with better burrs for espresso-adjacent use.</p>
+      <div class="tool why">~₹15,000–25,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Weber EG-1 / Lagom P64</div>
+      <p>Prosumer / high-end. Flat burr, espresso-capable, exceptional consistency. Approaching commercial quality at home. For the obsessive home barista with budget.</p>
+      <div class="tool why">~₹80,000–1,50,000</div>
+    </div>
+  </div>
+
+  <h4 style="margin-top:32px; letter-spacing:0.1em; font-size:12px; color:var(--gold);">COMMERCIAL GRINDERS</h4>
+  <div class="grid-4">
+    <div class="tool-card">
+      <div class="tool-name">Mahlkönig EK43 / EK43S</div>
+      <p>The most famous commercial grinder in the world. Originally designed for spices, James Hoffmann and Maxwell Colonna-Dashwood "discovered" its coffee capabilities. Flat burrs, extremely consistent, used as the reference grinder for filter coffee globally.</p>
+      <div class="tool why">~₹2,50,000+</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Mahlkönig Peak / E65S</div>
+      <p>Commercial espresso grinder. High-volume, temperature-stable, precise. Standard in quality espresso bars globally.</p>
+      <div class="tool why">~₹1,50,000–3,00,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Mythos One / Mythos Two (Simonelli)</div>
+      <p>Espresso-specific. Flat burr. Temperature-controlled. The Mythos Two adds integrated humidity sensing. Standard in Starbucks Reserve, premium cafes globally.</p>
+      <div class="tool why">~₹2,00,000–4,00,000</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Mazzer Major / Super Jolly</div>
+      <p>Italian. Workhorses of the espresso world. Extremely durable, found in cafes globally. Not the most precise by modern standards but bullet-proof reliable.</p>
+      <div class="tool why">~₹70,000–1,50,000</div>
+    </div>
+  </div>
+
+  <div class="pq">"A ₹5,000 grinder with a ₹50,000 machine will make worse coffee than a ₹15,000 grinder with a ₹8,000 machine. Invest in the grinder first. Every time."</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 5 · BREWING
+══════════════════════════════════════════════ -->
+<div id="brewing" class="season-header" data-num="05">
+  <div class="season-tag">Season 05</div>
+  <h2>The <em>Brew</em> — Methods, Ratios, and the Rules</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">The Core Methods</div>
+  <h3>Every Major Brewing Method Explained</h3>
+
+  <table class="brew-table">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Pressure</th>
+        <th>Ratio</th>
+        <th>Grind</th>
+        <th>Temp</th>
+        <th>Time</th>
+        <th>Cup Character</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="brew-method">Espresso</div></td>
+        <td>9 bar</td>
+        <td>1:2 (18g in → 36g out)</td>
+        <td>Fine</td>
+        <td>91–93°C</td>
+        <td>25–30s</td>
+        <td>Concentrated, intense, syrupy, crema on top</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Moka Pot</div></td>
+        <td>1–2 bar</td>
+        <td>1:7 approx</td>
+        <td>Fine-Medium</td>
+        <td>100°C (stovetop)</td>
+        <td>3–5 min</td>
+        <td>Strong, bold, bitter-edged, no real crema</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">V60 Pour Over</div></td>
+        <td>Gravity</td>
+        <td>1:15–1:17</td>
+        <td>Medium</td>
+        <td>90–96°C</td>
+        <td>2:30–3:30</td>
+        <td>Clean, bright, floral, transparent, tea-like</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Chemex</div></td>
+        <td>Gravity</td>
+        <td>1:15–1:17</td>
+        <td>Medium-Coarse</td>
+        <td>90–94°C</td>
+        <td>4–5 min</td>
+        <td>Very clean, light body, silky — thick paper removes oils</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">French Press</div></td>
+        <td>None</td>
+        <td>1:15</td>
+        <td>Coarse</td>
+        <td>93–96°C</td>
+        <td>4 min</td>
+        <td>Heavy body, oils present, rich, some sediment</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">AeroPress</div></td>
+        <td>Manual push</td>
+        <td>1:10–1:17 (versatile)</td>
+        <td>Variable</td>
+        <td>80–96°C</td>
+        <td>1–3 min</td>
+        <td>Depends entirely on recipe — most versatile device ever made</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Kalita Wave</div></td>
+        <td>Gravity</td>
+        <td>1:15–1:16</td>
+        <td>Medium</td>
+        <td>90–93°C</td>
+        <td>3–4 min</td>
+        <td>Even extraction, flat bed, forgiving, full-bodied for pour over</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Siphon / Vacuum</div></td>
+        <td>Vacuum</td>
+        <td>1:15</td>
+        <td>Medium</td>
+        <td>~93°C</td>
+        <td>5–8 min</td>
+        <td>Exceptionally clean, delicate, theatrical — full immersion then vacuum pull</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Turkish / Ibrik</div></td>
+        <td>None</td>
+        <td>1:10–1:12</td>
+        <td>Extra Fine</td>
+        <td>Near boil</td>
+        <td>2–4 min</td>
+        <td>Thick, unfiltered, strong, bitter, sediment settles in cup</td>
+      </tr>
+      <tr>
+        <td><div class="brew-method">Cold Brew</div></td>
+        <td>None</td>
+        <td>1:8–1:10 (concentrate)</td>
+        <td>Extra Coarse</td>
+        <td>Cold / Room temp</td>
+        <td>12–24 hrs</td>
+        <td>Low acid, sweet, smooth, heavy body — concentrate diluted before serving</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="rule-box">
+    <div class="rule-num">9 BAR</div>
+    <h4>The Espresso Pressure Standard</h4>
+    <p>The SCA (Specialty Coffee Association) standard for espresso extraction is 9 bars of pump pressure at the group head. This was established after decades of research — at 9 bars, water extracts the right balance of compounds from a correctly ground, dosed, and tamped puck. Many cheap home machines advertise 15 or 19 bars. This is not better — it is worse. Marketing pressure spec. Actual quality espresso is pulled at 9 bars. Some modern machines (Decent DE1, La Marzocco machines with pressure profiling) actually begin at lower pressure (2–4 bars pre-infusion), then ramp up to 9 bars. This pre-infusion stage gently saturates the puck before full extraction — reducing channelling and improving consistency.</p>
+  </div>
+
+  <div class="rule-box">
+    <div class="rule-num">1:2</div>
+    <h4>The Espresso Ratio</h4>
+    <p>For every gram of ground coffee going into the portafilter, approximately 2 grams of espresso should come out. A 18g dose should yield approximately 36g of liquid espresso. This is the most used specialty benchmark. Variations: <strong>Ristretto</strong> (1:1 to 1:1.5) — shorter, sweeter, more concentrated. <strong>Lungo</strong> (1:3 to 1:4) — longer, more bitter, more water. Each produces a dramatically different cup from the same beans on the same machine.</p>
+  </div>
+
+  <div class="rule-box">
+    <div class="rule-num">94°C</div>
+    <h4>Water Temperature</h4>
+    <p>SCA standard: 91–94°C. Darker roasts extract better at lower temperatures (88–90°C) — they're more soluble. Lighter roasts need higher heat (92–96°C) to properly extract. Water off the boil (100°C) creates bitter over-extraction. Cold water creates sour under-extraction. The science: solubility of coffee's flavour compounds peaks at different temperatures — acids extract at lower temps, bitterness at higher. Dialling temperature is a serious extraction variable in specialty.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">The Great Comparison</div>
+  <h3>Espresso vs Pour Over vs French Press</h3>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-icon">☕</span>
+      <h4>Espresso</h4>
+      <p><strong>Philosophy:</strong> Concentration and intensity. Extract the maximum in minimum time using pressure.</p>
+      <p><strong>What you need:</strong> Espresso machine (9-bar), quality burr grinder capable of fine espresso grind, scale, tamper. All four are non-negotiable.</p>
+      <p><strong>Learning curve:</strong> Very high. Every variable affects outcome dramatically. Takes months to dial in properly.</p>
+      <p><strong>Best for:</strong> Black espresso shots, milk-based drinks, concentrated coffee culture. The base of every café drink.</p>
+      <p><strong>Worst for:</strong> Casual, fuss-free mornings. Appreciation of subtle origin notes.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🫗</span>
+      <h4>Pour Over (V60 / Chemex)</h4>
+      <p><strong>Philosophy:</strong> Clarity and origin expression. Let gravity and filter do the work. The barista controls every variable manually.</p>
+      <p><strong>What you need:</strong> Dripper, gooseneck kettle, scale, timer, good grinder, filters. Relatively affordable entry.</p>
+      <p><strong>Learning curve:</strong> Medium. Technique (pour pattern, timing, bloom) matters. But forgiving enough to start immediately.</p>
+      <p><strong>Best for:</strong> Single-origin, light roasts, appreciating coffee as a flavour experience. The intellectual's brew method.</p>
+      <p><strong>Worst for:</strong> Fast, effortless mornings. Milk-based drinks.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏺</span>
+      <h4>French Press</h4>
+      <p><strong>Philosophy:</strong> Full immersion, full body. No paper filter — oils and fines remain in the cup. The most democratic brewing method.</p>
+      <p><strong>What you need:</strong> French press, coarse grinder, hot water, timer. The most affordable setup that still produces genuine quality.</p>
+      <p><strong>Learning curve:</strong> Very low. Steep, press, pour. Forgiving of almost everything.</p>
+      <p><strong>Best for:</strong> Rich, full-bodied coffee. Dark roasts. Weekend mornings. Someone entering specialty from a position of ease.</p>
+      <p><strong>Worst for:</strong> Origin clarity, brightness, subtle aromatics. Also produces sediment.</p>
+    </div>
+  </div>
+
+  <!-- COLD -->
+  <h3 style="margin-top:48px;">Cold Coffee — The Full Spectrum</h3>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-icon">🧊</span>
+      <h4>Cold Brew (Immersion)</h4>
+      <p>Extra coarse grounds steeped in cold or room-temperature water for 12–24 hours. Filtered through paper or cloth. Produces a concentrate (1:8) diluted before serving. Extremely low acidity. Sweet, smooth, heavy. Mellow. Works best with medium-dark to dark roasts. Light roasts can taste flat and underwhelming in cold brew.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💧</span>
+      <h4>Cold Drip / Kyoto Tower</h4>
+      <p>Cold water drips, drop by drop, through a bed of coffee at room temperature. Takes 4–8 hours. Produces a cleaner, brighter cup than immersion cold brew — more like a cold pour over. Equipment is a Japanese-style glass tower. Spectacular to watch. Intensely labour-focused. Clarity and complexity together.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <h4>Flash-Brewed / Japanese Iced</h4>
+      <p>Hot coffee brewed directly onto ice. V60 or AeroPress recipe adjusted: replace half the brewing water with ice in the cup, use hotter and more concentrated brew water. The rapid chilling locks in aromatics that cold brew loses. Bright, floral, transparent. The best method for appreciating a specialty light roast cold.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 6 · CULTURAL TRADITIONS
+══════════════════════════════════════════════ -->
+<div id="culture" class="season-header" data-num="06">
+  <div class="season-tag">Season 06</div>
+  <h2>Coffee Through <em>Cultures</em> — Five Countries, Five Philosophies</h2>
+</div>
+
+<section class="section">
+
+  <div class="grid-2">
+    <div class="card">
+      <span class="card-icon">🇮🇹</span>
+      <h4>Italian — The Church of Espresso</h4>
+      <p>In Italy, coffee is not a beverage. It is a ritual with rules. Espresso — 25–30ml, pulled in under 30 seconds, consumed standing at the bar in under 2 minutes. Cappuccino is a morning drink only — never after 11am, never after a meal. Ordering a cappuccino after lunch marks you as a tourist immediately. The bar is a social institution: you pay before you order, slide your receipt across, exchange three sentences with the barista, drink, leave. The entire interaction is 4 minutes. Italian espresso blends favour Robusta for crema and body, using dark roasts. The "taste of roast" is considered a feature, not a defect. Lavazza, illy, Kimbo, Segafredo — household names.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🇯🇵</span>
+      <h4>Japanese — Precision as Devotion</h4>
+      <p>Japan's coffee culture is built around the Kissaten — the traditional Japanese coffee house, dating from the early 1900s. Quiet, contemplative, almost ceremonial. Japanese baristas are famous for their obsessive precision: each pour measured, each movement deliberate, each second timed. The V60 dripper itself is Japanese (Hario). Siphon/vacuum brewing is deeply embedded in Japanese café culture — theatrical, precise, beautiful. Kono, Kalita Wave, and Hario are Japanese tools that shaped the global pour-over movement. Japanese palate prefers clean, clarity, delicacy. No shouting. No rush. Your coffee is 10 minutes of stillness.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🇺🇸</span>
+      <h4>American — Volume, Then Craft</h4>
+      <p>America invented first-wave commodity coffee culture (Maxwell House, Folgers). Then it invented the third wave. This is not ironic — it is classic American overcorrection at scale. Drip coffee (auto-drip machines) remains the largest consumer format. But the third wave explosion produced the world's most influential specialty roasters: Blue Bottle, Stumptown, Intelligentsia, Counter Culture, Onyx, Heart, Sightglass. The American specialty scene is now scientifically rigorous, culturally diverse, and export-influential. Cold brew is an American commercial invention. The Frappuccino is American. America simultaneously has the worst and best coffee culture on earth.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🇫🇷</span>
+      <h4>French — Dark, Philosophical, Dairy-Heavy</h4>
+      <p>France's café culture is inseparable from its intellectual history — Voltaire reportedly consumed 40–50 cups a day, and the Revolution was planned in the coffeehouses of Paris. French roast is very dark, which compensates for historically lower-quality beans by adding roast character. Café au lait (equal parts brewed coffee and hot milk) is the canonical morning drink. French press is named for France but actually more of a European pan-tradition. France's specialty scene is smaller than the UK/Scandinavia/US but growing rapidly, particularly in Paris.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🇮🇳</span>
+      <h4>Indian — Filter, Chicory, and Now the Third Wave</h4>
+      <p>South Indian filter coffee (Kaapi) is one of the world's most distinct coffee traditions. A metal davara-tumbler set. A brass filter. Decoction (concentrated brew) made from dark-roasted Arabica + Robusta + chicory (20–40% chicory added for body and bitterness). Boiling hot milk, frothed by pouring between tumbler and davara from height. Served at 65–70°C. Sweet. Creamy. Non-negotiable in Tamil Nadu, Karnataka, Kerala homes. This is India's first-wave heritage. And now: Blue Tokai, Third Wave Coffee, Subko, Corridor Seven, Filter Story — a full specialty third wave is rising, anchored by Araku Valley's tribal cooperatives, Coorg's estates, and Chikkamagaluru's legacy. India is the 7th largest coffee producer on earth and is only now learning to drink its own best beans.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌍</span>
+      <h4>Ethiopian — Coffee's Ancestral Home</h4>
+      <p>In Ethiopia, the Coffee Ceremony (Buna) is the highest form of hospitality. Green beans are washed, then roasted in a pan over charcoal right in front of guests — the aroma of roasting fills the room. Ground in a wooden mortar. Brewed three times from the same grounds. First cup: "Abol" (strongest, for adults). Second: "Tona." Third: "Baraka" (blessing). The ceremony takes 1–2 hours. Sharing it is sharing your life. In Ethiopia, 60% of the coffee produced is consumed domestically — a country that lives inside its own origin story. Every specialty cup of Ethiopian coffee in the world traces back to here.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 7 · TASTING
+══════════════════════════════════════════════ -->
+<div id="tasting" class="season-header" data-num="07">
+  <div class="season-tag">Season 07</div>
+  <h2>Tasting Coffee — <em>Cupping</em>, the Flavour Wheel, and Building a Palate</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">Cupping Protocol</div>
+  <h3>How the Industry Tastes Coffee — The SCA Standard</h3>
+
+  <p>Cupping is the standardised method for evaluating coffee quality, used by Q Graders, roasters, buyers, and baristas globally. The SCA (Specialty Coffee Association) defines the exact protocol:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <span class="card-icon">⚖️</span>
+      <h4>The Setup</h4>
+      <p><strong>Ratio:</strong> 8.25g of coffee per 150ml of water (approximately 1:18). <strong>Grind:</strong> Medium-coarse. <strong>Water:</strong> 93°C (±1°C). <strong>Vessel:</strong> Standardised cupping bowl (240ml). Multiple samples of the same coffee brewed simultaneously (typically 5 bowls) to identify inconsistency or defects. Coffees are labelled blind — no brand or origin information visible to maintain objectivity.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">👃</span>
+      <h4>The Sequence</h4>
+      <p><strong>1. Fragrance:</strong> Smell dry grounds before water is added. <strong>2. Aroma:</strong> Smell immediately after hot water is added (wet crust). <strong>3. Break:</strong> At 4 minutes, stir crust forward — lean in and inhale at the moment of breaking. <strong>4. Clean up:</strong> Remove floating grounds and foam with two spoons. <strong>5. Slurp:</strong> Using a cupping spoon, slurp coffee loudly (aerates it, spreads it across palate) and evaluate. Cool slightly between tastings.</p>
+    </div>
+  </div>
+
+  <h3>What You're Evaluating</h3>
+
+  <div class="cupping-grid">
+    <div class="cupping-attr">
+      <div class="attr-name">Fragrance / Aroma</div>
+      <p>Dry (fragrance) vs wet (aroma). Often the most immediately expressive phase — floral, fruit, chocolate, caramel, spice. Aromatics deteriorate fast; assess immediately.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Flavour</div>
+      <p>The combined taste and retronasal aroma experience on the palate. The main impression — fruit, sweetness, earthiness, etc. Evaluated at ~70°C.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Aftertaste</div>
+      <p>What lingers after swallowing. Good coffee: pleasant, long, evolving finish. Defective coffee: short, harsh, ashy, papery aftertaste.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Acidity</div>
+      <p>Not "sour" — quality acidity is brightness and liveliness. Like biting a ripe apple. Can be citric, malic, tartaric, phosphoric. Absent in dark roasts. Prominent in light roasts from high altitudes.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Body</div>
+      <p>Weight and mouthfeel — the viscosity and density of the liquid on the tongue. French press = heavy body. V60 paper filter = light body. Neither is "better." Context determines preference.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Balance</div>
+      <p>How well all attributes work together. A coffee can score high on individual attributes but low on balance if they conflict or one dominates inappropriately.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Sweetness</div>
+      <p>Natural sweetness from fruit sugars surviving processing and roasting. Distinct from added sugar. High-quality coffees have inherent sweetness — caramel, honey, fruit sugar. Under-developed or over-extracted coffee lacks sweetness.</p>
+    </div>
+    <div class="cupping-attr">
+      <div class="attr-name">Overall / Score</div>
+      <p>Total SCA score out of 100. 80+ = Specialty grade. 85+ = Outstanding. 90+ = Exceptional (rare, auction-priced). Below 80 = commercial grade. The cup score on your specialty bag refers to this system.</p>
+    </div>
+  </div>
+
+  <div class="pq">"The SCA Flavour Wheel has 110 descriptors. New tasters see them as impossible. Experienced tasters know they're just shorthand for things your nose already knows — they just need to be named."</div>
+
+  <h3>Building Your Palate — A Practical Guide</h3>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-icon">🍋</span>
+      <h4>Train Acidity</h4>
+      <p>Eat fresh fruit daily and pay attention to the sourness. Ripe vs unripe mango, lime vs lemon, passion fruit vs orange. In coffee, citric acidity (lemon, orange) comes from Kenyan or Ethiopian coffees. Malic acidity (apple, grape) from Colombian or Central American. Phosphoric acidity (carbonated brightness) from high-altitude Kenyan.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🍫</span>
+      <h4>Train Sweetness & Body</h4>
+      <p>Compare dark chocolate (70%, 85%, 90%) for bitterness and sweetness. Compare honey varieties (acacia vs raw) for floral vs dark sweetness. Body in coffee maps to viscosity in everyday food — compare milk and water on your tongue. This translates directly to French press vs filtered coffee body.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌿</span>
+      <h4>Taste Comparatively</h4>
+      <p>The most powerful way to build a palate: brew the same recipe with two different origins side by side. Ethiopian vs Colombian. Natural vs washed. You cannot "learn" the difference by description — only by tasting them next to each other. Keep notes. Date them. Return to them in 6 months and see how your description changes.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 8 · PEOPLE & COMPETITIONS
+══════════════════════════════════════════════ -->
+<div id="people" class="season-header" data-num="08">
+  <div class="season-tag">Season 08</div>
+  <h2>The <em>People</em> Who Shaped Coffee</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">World Barista Championship</div>
+  <h3>The WBC — Coffee's Olympic Stage</h3>
+
+  <p>The World Barista Championship, run by the SCA, brings together national champions from 60+ countries. Each competitor has 15 minutes to serve 4 espressos, 4 milk drinks, and 4 signature drinks to a panel of 4 sensory judges + 2 technical judges. It is judged to six decimal places. It is coffee's most influential idea-generating event — techniques, equipment, and varietals debuted on the WBC stage routinely transform the entire industry within 2–3 years.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <h4>2025 Champion</h4>
+      <p><strong>Jack Simpson — Australia</strong> (Axil Coffee Roasters). Won in Milan at HostMilano. Runner-up in 2024 (lost by 1 point), 3rd in 2023. His 2025 routine was built around journal entries reflecting on those losses — one of the most emotionally resonant WBC performances in the event's history.</p>
+    </div>
+    <div class="card">
+      <h4>2024 Champion</h4>
+      <p><strong>Mikael Jasin — Indonesia</strong> (So So Good Coffee Co). First Indonesian WBC champion ever. Routine built around meditation and mindfulness. Used an Ethiopian landrace variety grown in Colombia (Finca El Diviso) and a Gesha from Finca Deborah, Panama.</p>
+    </div>
+    <div class="card">
+      <h4>2007 Champion</h4>
+      <p><strong>James Hoffmann — UK</strong> (Square Mile). The competition that launched one of coffee's most influential careers. Hoffmann's WBC win gave him the platform that led to Square Mile, the World Atlas of Coffee, and his YouTube channel which has over 2 million subscribers and defines specialty coffee education globally.</p>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:48px;">The Legends</div>
+  <h3>Twelve People Who Changed Coffee</h3>
+
+  <div class="grid-3">
+    <div class="person-card">
+      <div class="person-name">James Hoffmann</div>
+      <div class="person-title">WBC 2007 · Square Mile · Author · YouTuber</div>
+      <p>The most influential coffee communicator alive. His book The World Atlas of Coffee (3rd edition) is the essential reference. His YouTube channel broke the wall between professional and home coffee. Won WBC 2007 (UK). Co-founded Square Mile Coffee Roasters, London. Famous for methodical, evidence-based takes — the "better coffee will always beat a better brewer" maxim is his.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Scott Rao</div>
+      <div class="person-title">Consultant · Author · The Scientist</div>
+      <p>Coffee's most rigorous technical writer. The Coffee Roaster's Companion is the professional roaster's bible. Everything But Espresso is the definitive extraction textbook. Rao's work transformed roasting from an art into a quantified, reproducible science. His "Rao Spin" technique for espresso distribution became universally adopted.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Tim Wendelboe</div>
+      <div class="person-title">WBC 2004 · Tim Wendelboe Café · Norway</div>
+      <p>Won WBC 2004. Based in Oslo. His roastery and tiny 4-seat café in Grünerløkka is considered one of the most important coffee destinations in the world. Known for extreme transparency in sourcing, precision roasting, and technical rigor. His disagreements with Scott Rao on roast curve methodology are the most intellectually interesting debates in specialty coffee.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Sasa Sestic</div>
+      <div class="person-title">WBC 2015 · Project Origin · Australia</div>
+      <p>Won WBC 2015 with an anaerobic-processed Colombian coffee — introducing the technique that went on to reshape processing globally. Founded Project Origin, a sourcing company with direct farm relationships. Serbian-born, Australian-based. Brought experimental processing into the mainstream specialty conversation.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Maxwell Colonna-Dashwood</div>
+      <div class="person-title">Water For Coffee · UK</div>
+      <p>Multiple UK Barista Champion. Wrote Water for Coffee — the only book that comprehensively addresses water chemistry for brewing. Demonstrated that the mineral content of your brewing water (calcium, magnesium, bicarbonate levels) changes the cup as dramatically as the bean itself. Now used as a reference by specialty cafes globally.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Alfred Peet</div>
+      <div class="person-title">Peet's Coffee · The Godfather</div>
+      <p>Dutch-American. Founded Peet's Coffee in Berkeley, California in 1966 — the first specialty coffee shop in America. Trained the founders of Starbucks. Directly responsible for introducing high-quality espresso and fresh-roasted beans to America. Without Alfred Peet, there is no Starbucks, no third wave, no modern American coffee culture.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Sunalini Menon</div>
+      <div class="person-title">India's First Female Q Grader · Coffee Lab</div>
+      <p>Founded Coffee Lab India in Bengaluru. India's most respected quality assessor and pioneer of the specialty movement within India. Instrumental in raising the quality standards of Indian estate coffees and positioning them as world-class specialty offerings. A foundational figure for Indian coffee's current global reputation.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">Trish Rothgeb</div>
+      <div class="person-title">Coined "Third Wave"</div>
+      <p>American roaster and writer who coined the term "third wave coffee" in 2002. A phrase that named an entire movement and gave it cultural coherence. Now used globally to distinguish specialty from commercial coffee culture.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-name">George Howell</div>
+      <div class="person-title">America's Specialty Pioneer</div>
+      <p>Founder of The Coffee Connection in Boston (1974) — the first American café to focus on single-origin, freshly roasted specialty coffee before the term existed. Sold to Starbucks in 1994. Founded George Howell Coffee in 2004. The quiet original from whom the entire US specialty wave descends.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 9 · TOOLS & EQUIPMENT
+══════════════════════════════════════════════ -->
+<div id="tools" class="season-header" data-num="09">
+  <div class="season-tag">Season 09</div>
+  <h2>The <em>Tools</em> — Small Things That Change Everything</h2>
+</div>
+
+<section class="section">
+  <div class="section-label">Small Tools, Massive Impact</div>
+  <h3>The Details That Separate Good from Great</h3>
+
+  <div class="grid-4">
+    <div class="tool-card">
+      <div class="tool-name">Precision Scale (0.1g)</div>
+      <p>The single most impactful accessory in coffee. Brewing by weight (not volume) is how you achieve repeatability. A 1g difference in dose can be the difference between perfection and disappointment in espresso.</p>
+      <div class="tool why">Recs: Acaia Pearl · Timemore Black Mirror · Hario V60 Scale</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Gooseneck Kettle</div>
+      <p>For pour-over brewing, a gooseneck spout gives precise, controlled water flow. A regular kettle pours too fast and too wide — you lose pour control entirely, creating channelling and uneven extraction.</p>
+      <div class="tool why">Recs: Fellow Stagg EKG · Hario Buono · Brewista Smart Pour</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Tamper (58mm)</div>
+      <p>For espresso — compresses the puck to create even resistance for water. Most commercial portafilter baskets are 58mm. Flat tamper preferred (even compression). The W340 from ONA Coffee (flat tamper with a specific convex edge) became famous after WBC usage. Even pressure matters — unlevel tamping causes channelling.</p>
+      <div class="tool why">Recs: ONA W340 · Decent Tamper · Pullman BigStep · Normcore</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">WDT Tool</div>
+      <p>Weiss Distribution Technique. A tool with fine needles that stirs the ground coffee in the portafilter basket before tamping, breaking up clumps and ensuring even distribution. Eliminates "fluking" and channelling. A $20 tool that transforms espresso consistency dramatically.</p>
+      <div class="tool why">Recs: Numerous options; DIY versions also highly effective</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Distribution Tool / Leveler</div>
+      <p>Spins and levels the coffee grounds in the portafilter before tamping — ensures even bed density. Works in combination with WDT. The Stockfleth's Move (rotating finger technique) achieves the same result manually.</p>
+      <div class="tool why">Recs: OCD (Ona Coffee Distribution) · MHW-3Bomber</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Puck Screen</div>
+      <p>A thin stainless steel screen placed on top of the puck inside the portafilter. Distributes water evenly from the group head across the entire puck surface. Reduces channelling significantly. Simple, cheap, dramatically effective.</p>
+      <div class="tool why">~₹500–1,500</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Hario V60 (01 / 02)</div>
+      <p>The most culturally important pour-over dripper in the world. Japanese. Conical shape, single large hole, spiral ribs — requires pouring skill and consistency. Size 01 (1–2 cups), 02 (1–4 cups). Paper filters must be rinsed before use.</p>
+      <div class="tool why">~₹800–2,500 depending on material</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Refractometer (TDS meter)</div>
+      <p>Measures Total Dissolved Solids — how much coffee is actually dissolved in your cup. Allows you to calculate extraction yield precisely. The science tool that separates serious home brewers and professionals from casual users. Not needed to enjoy coffee. Essential to understand it.</p>
+      <div class="tool why">Recs: Atago PAL-COFFEE · VST Refractometer</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:48px;">Espresso Machines — Tiers</h3>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-icon">🏠</span>
+      <h4>Entry-Level Home (₹15,000–50,000)</h4>
+      <p><strong>Gaggia Classic Pro:</strong> Italian. The most recommended true espresso entry machine — has a 3-way solenoid, proper boiler, no pressurised basket (a red flag). Modifiable. A cult machine. <strong>Breville Barista Express:</strong> Has grinder built in — convenient but the grinder quality is a compromise. <strong>Delonghi Dedica EC685:</strong> Compact, affordable, good milk steam. Pressurised basket (a limitation — see Fakes section).</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔧</span>
+      <h4>Prosumer (₹50,000–3,00,000)</h4>
+      <p><strong>La Marzocco Linea Mini:</strong> The home version of the iconic café machine. Dual boilers, commercial group head. Near-café consistency. <strong>Rocket Appartamento:</strong> Italian, heat exchanger, beautiful design. <strong>Lelit Bianca:</strong> Flow control paddle — the most advanced flow profiling on a home machine. <strong>ECM Synchronika:</strong> German, dual boiler, exceptional build quality. <strong>Decent DE1:</strong> App-controlled, pressure profiling, the data-scientist's espresso machine.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏆</span>
+      <h4>Commercial (₹3,00,000+)</h4>
+      <p><strong>La Marzocco GB5 / Linea PB:</strong> The standard of the specialty café world globally. Group-by-group temperature control, pre-infusion, precision. <strong>Synesso MVP Hydra:</strong> American. Highly configurable. Used in WBC routinely. <strong>Kees van der Westen:</strong> Dutch. The Ferrari of espresso machines — beautiful, precise, extremely expensive. <strong>Slayer:</strong> Needle valve flow control. The original pressure-profiling commercial machine.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SEASON 10 · FAKES & MYTHS
+══════════════════════════════════════════════ -->
+<div id="fakes" class="season-header" data-num="10">
+  <div class="season-tag">Season 10</div>
+  <h2>What's <em>Fake</em> — The Myths, Scams & Shortcuts</h2>
+</div>
+
+<section class="section">
+
+  <div class="fake-box">
+    <h4>❌ The 15-Bar Marketing Lie</h4>
+    <p>Every budget espresso machine advertises "15 bar" or "19 bar" pump pressure as if more bars = better coffee. This is false. The SCA standard for espresso is 9 bars at the group head. Machines with 15-bar pumps either have an OPV (Over Pressure Valve) that reduces the pressure to ~9 bars at the puck (good) — or they genuinely push 15 bars through the coffee (bad, producing bitter, over-extracted espresso). The bar spec of the pump is meaningless. What matters is the pressure at the coffee puck. Always ask: does this machine have a pressure gauge? Can the OPV be adjusted?</p>
+  </div>
+
+  <div class="fake-box">
+    <h4>❌ Pod Machines (Nespresso / Dolce Gusto)</h4>
+    <p>Pod machines are convenient. They are not espresso. Real espresso requires: a correctly dialled-in burr grinder, fresh beans within 3 weeks of roast, a non-pressurised basket, and correctly calibrated pressure. A pod contains pre-ground coffee of unknown roast date sealed under pressure — it is, by definition, stale. The pressurised pod capsule also means the machine doesn't need to extract properly — the pod itself creates resistance artificially. The resulting drink is "espresso-style" at best. The environmental cost (billions of single-use capsules annually) is a separate catastrophe. Nespresso's crema is largely produced by pressurised gas infusion in the capsule — not actual extraction quality.</p>
+  </div>
+
+  <div class="fake-box">
+    <h4>❌ Instant Coffee as "Coffee"</h4>
+    <p>Instant coffee is brewed coffee that has been either spray-dried (liquid coffee sprayed into a hot chamber until it becomes powder) or freeze-dried (frozen into ice then sublimated into powder). What you are re-dissolving is pre-brewed, thermally degraded coffee. The volatile aromatics — the reason coffee smells and tastes complex — are mostly destroyed during the spray-drying process. What remains is a caffeine delivery device with a simplified, flat flavour profile. Freeze-dried is marginally better. Neither is coffee as specialty defines it. In India: Nescafé Gold, Bru Green Label — sold as convenience, not as quality.</p>
+  </div>
+
+  <div class="fake-box">
+    <h4>❌ Superautomatic Machines (One-Button Everything)</h4>
+    <p>Bean-to-cup superautomatics (DeLonghi Magnifica, Jura, Melitta) grind and brew in one machine at the press of a button. Convenient. Not specialty-grade. The built-in grinders are typically conical burr but designed for speed and durability, not precision. The brewing chamber pre-heats coffee to extreme temperatures. The grind-to-brew time is near-zero (no settling, no WDT, no distribution). The result is convenient but inconsistent — you cannot dial it in the way you can a separate grinder and machine. Fine for an office. Not fine for a café or a serious home bar.</p>
+  </div>
+
+  <div class="fake-box">
+    <h4>❌ "Espresso Roast" as a Label</h4>
+    <p>"Espresso roast" is not a roast level. It is a marketing term. Any roast level can be brewed as espresso. A light roast Ethiopian can be pulled as espresso (sour, fruity, intense). A dark roast blend can be pulled as espresso (bitter, body-heavy, classic). "Espresso roast" on a bag means the roaster thinks the beans work well for espresso — it does not mean dark roast, it does not mean better, and it does not legally mean anything at all.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     BOOKS
+══════════════════════════════════════════════ -->
+<div id="books" class="season-header" data-num="📚">
+  <div class="season-tag">Reference</div>
+  <h2>The Coffee <em>Reading List</em></h2>
+</div>
+
+<section class="section">
+  <div class="grid-2">
+    <div class="book-card">
+      <div class="book-num">01</div>
+      <div>
+        <div class="book-title">The World Atlas of Coffee</div>
+        <div class="book-author">James Hoffmann</div>
+        <div class="book-desc">The only book you genuinely need if you read one. Origins, processing, roasting, and brewing in plain language without dumbing down. 3rd edition updated for current specialty landscape. Scott Rao calls it his favourite all-around coffee book.</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">02</div>
+      <div>
+        <div class="book-title">The Coffee Roaster's Companion</div>
+        <div class="book-author">Scott Rao</div>
+        <div class="book-desc">The professional roaster's bible. Quantified, scientific, exhaustive. If you're serious about understanding roasting as a process — chemistry, heat transfer, drum dynamics — this is the one. Not casual reading. Essential professional reference.</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">03</div>
+      <div>
+        <div class="book-title">Everything But Espresso</div>
+        <div class="book-author">Scott Rao</div>
+        <div class="book-desc">Rao's companion volume covering all non-espresso brewing: extraction theory, pour over, drip, French press, water chemistry. The technical foundation for anyone wanting to understand why their pour over tastes the way it does.</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">04</div>
+      <div>
+        <div class="book-title">Water for Coffee</div>
+        <div class="book-author">Maxwell Colonna-Dashwood</div>
+        <div class="book-desc">The only comprehensive treatment of water chemistry in coffee brewing. Demonstrates that magnesium, calcium, and bicarbonate levels in your water change the cup as dramatically as the bean. Changed how the industry thinks about "the invisible ingredient."</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">05</div>
+      <div>
+        <div class="book-title">Uncommon Grounds</div>
+        <div class="book-author">Mark Pendergrast</div>
+        <div class="book-desc">The definitive history of coffee — from Ethiopia to the present day. Politics, economics, colonialism, commerce, and culture. A book that makes you understand how much of the modern world was shaped by this one commodity. Essential context for anyone building a brand in this space.</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">06</div>
+      <div>
+        <div class="book-title">God in a Cup</div>
+        <div class="book-author">Michaele Weissman</div>
+        <div class="book-desc">A narrative non-fiction account of three specialty coffee buyers — Intelligentsia, Counter Culture, Stumptown — and how they source, travel, and taste. The book that showed the world what "direct trade" looks like in practice. Reads like a thriller about coffee people.</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">07</div>
+      <div>
+        <div class="book-title">The Blue Bottle Craft of Coffee</div>
+        <div class="book-author">James Freeman</div>
+        <div class="book-desc">Blue Bottle's founder on the brand's philosophy: sourcing, roasting, brewing. More accessible than Rao, more craft-focused than Hoffmann. Excellent for someone in the hospitality/café side of specialty coffee who wants a brand-building case study alongside technique.</div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-num">08</div>
+      <div>
+        <div class="book-title">The Perfect Cup</div>
+        <div class="book-author">Tim Wendelboe</div>
+        <div class="book-desc">Brewing techniques from one of the world's most respected specialty baristas and roasters. Essential flavour profiling and practical extraction guidance. Concise and technical — Wendelboe does not pad his writing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     IG MASTER CONTENT PLAN
+══════════════════════════════════════════════ -->
+<div id="ig" class="season-header" data-num="📱">
+  <div class="season-tag">Content Strategy</div>
+  <h2>The <em>Instagram</em> Master Plan — Kapiculture</h2>
+</div>
+
+<section class="section">
+  <h3>The 10-Season Content Architecture</h3>
+  <p>Each season maps to a 4–6 week Instagram content cycle, with posts released across all three formats (Carousel, Reel, Long Caption). Audiences are layered within each season — beginner posts build the funnel, intermediate builds trust, expert builds authority and brand credibility.</p>
+
+  <div class="wave-grid">
+    <div class="wave-card">
+      <div class="wave-num">S1</div>
+      <h4>Season 1 · Origin</h4>
+      <div class="wave-period">Weeks 1–4</div>
+      <p>Baba Budan story. Ethiopia myth. The waves. The plant. Coffee cherry anatomy.</p>
+      <div class="wave-brands">Hook: "India's coffee started with a smuggler and 7 seeds."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S2</div>
+      <h4>Season 2 · Processing</h4>
+      <div class="wave-period">Weeks 5–8</div>
+      <p>Natural vs washed vs honey. Monsooned Malabar. Harvesting methods. Anaerobic.</p>
+      <div class="wave-brands">Hook: "Same bean. 3 processing methods. 3 completely different coffees."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S3</div>
+      <h4>Season 3 · Roasting</h4>
+      <div class="wave-period">Weeks 9–12</div>
+      <p>Light vs dark roast chemistry. First crack. Famous roasters. Degassing. Storage.</p>
+      <div class="wave-brands">Hook: "Light roast doesn't mean weak. Dark roast doesn't mean strong."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S4</div>
+      <h4>Season 4 · Grinding</h4>
+      <div class="wave-period">Weeks 13–16</div>
+      <p>Blade vs burr. Flat vs conical. Grind size guide. Grinder buying guide.</p>
+      <div class="wave-brands">Hook: "You're spending on the machine. The money should go here instead."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S5</div>
+      <h4>Season 5 · Brewing</h4>
+      <div class="wave-period">Weeks 17–22</div>
+      <p>Every brew method. Espresso rules. Cold coffee. Ratios. Temperature. The 9-bar standard.</p>
+      <div class="wave-brands">Hook: "Your espresso machine says 15 bars. That's not the spec that matters."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S6</div>
+      <h4>Season 6 · Culture</h4>
+      <div class="wave-period">Weeks 23–26</div>
+      <p>Italy, Japan, India, America, France, Ethiopia. South Indian filter coffee deep dive.</p>
+      <div class="wave-brands">Hook: "Ordering a cappuccino after 11am in Italy marks you immediately."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S7</div>
+      <h4>Season 7 · Tasting</h4>
+      <div class="wave-period">Weeks 27–30</div>
+      <p>How to cup. The flavour wheel. Acidity, body, sweetness. Building a palate.</p>
+      <div class="wave-brands">Hook: "Specialty coffee gives you a score out of 100. Here's what the numbers mean."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S8</div>
+      <h4>Season 8 · People</h4>
+      <div class="wave-period">Weeks 31–34</div>
+      <p>James Hoffmann. Scott Rao. Tim Wendelboe. WBC 2024–2025. India's pioneers.</p>
+      <div class="wave-brands">Hook: "The guy who won the WBC in 2025 lost by 1 point the year before."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S9</div>
+      <h4>Season 9 · Tools</h4>
+      <div class="wave-period">Weeks 35–38</div>
+      <p>The small tools that matter. Espresso machine tiers. Grinder buying guide India.</p>
+      <div class="wave-brands">Hook: "The ₹500 tool that transforms espresso consistency."</div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-num">S10</div>
+      <h4>Season 10 · Fakes & Books</h4>
+      <div class="wave-period">Weeks 39–42</div>
+      <p>Pod machine myth. 15-bar lie. Instant coffee reality. The reading list.</p>
+      <div class="wave-brands">Hook: "Your Nespresso machine is not making espresso. Here's the proof."</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:56px;">Hashtag Architecture for Kapiculture</h3>
+
+  <div class="grid-3">
+    <div class="card">
+      <h4>Core Brand Tags (Every post)</h4>
+      <p style="font-family:'DM Mono',monospace; font-size:12px; line-height:2;">#Kapiculture #KapicultureIndia #IndianCoffee #SpecialtyCoffeeindia #ThirdWaveCoffee #CoffeeIndia #CoffeeLover</p>
+    </div>
+    <div class="card">
+      <h4>Topic-Specific Tags</h4>
+      <p style="font-family:'DM Mono',monospace; font-size:12px; line-height:2;">#CoffeeOrigin #BabaBudan #CoffeeProcessing #CoffeeRoasting #CoffeeBrewing #Espresso #PourOver #FrenchPress #V60 #CoffeeCupping #BaristaCommunity</p>
+    </div>
+    <div class="card">
+      <h4>Reach Tags (Wider audience)</h4>
+      <p style="font-family:'DM Mono',monospace; font-size:12px; line-height:2;">#CoffeeCommunity #CoffeeEducation #SpecialtyCoffee #CoffeeGeek #HomeBarista #CoffeeScience #SingleOrigin #DirectTrade #IndiaBarista</p>
+    </div>
+  </div>
+
+  <div class="pq">"Every post from Kapiculture should leave someone either genuinely learning something, or seeing coffee differently. Not selling first. Educating first. Sales follow depth."</div>
+
+  <h3>Reel Hook Bank — 20 Ready Openers</h3>
+  <div class="grid-2">
+    <div class="card">
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"The coffee bean is not a bean. It's a seed."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"India invented nothing in coffee. A saint smuggled it in. And it changed everything."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Your espresso machine says 15 bars. That's not how good espresso works."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Dark roast doesn't have more caffeine. Light roast does. Here's why."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"The 2025 World Barista Champion lost by a single point the year before."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"The one-way valve on your coffee bag is doing something critical right now."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Nespresso pods don't make espresso. Here's the actual definition."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"South Indian filter coffee beats most Italian espresso for complexity. This is not a debate."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Your grinder matters more than your espresso machine. Always."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"India is the 7th largest coffee producer. 95% of its best beans go abroad. This is changing."</p>
+    </div>
+    <div class="card">
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"This ₹500 tool will improve your espresso more than a ₹5,000 accessory."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"The same bean tastes completely different based on how it was washed. Here's proof."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"First crack is the sound of your coffee becoming coffee."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Cold brew and iced coffee are not the same thing. Not even close."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Specialty coffee gives every bean a score out of 100. Your supermarket coffee scores 68."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"If you're not checking the roast date on your bag, you're not really buying specialty."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"The Japanese coffee shop that inspired the modern pour over has no Instagram presence."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Blade grinders destroy coffee. Here's the physics."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"Araku Valley coffee. Tribal cooperatives. Award-winning. Most Indians have never heard of it."</p>
+      <p style="font-size:13px; font-style:italic; margin-bottom:8px;">"James Hoffmann spent 3 years finding the perfect French press technique. Here's what he found."</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>Kapiculture Coffee Bible · Compiled May 2026 · Sources: SCA, James Hoffmann (World Atlas of Coffee), Scott Rao, Daily Coffee News, BeanScene Magazine, DD News, Coffee Lab India, Climpson & Sons, Fresh Cup Magazine, Modernist Cuisine</p>
+  <div class="footer-logo">KAPICULTURE</div>
+</footer>
+
+</body>
+</html>

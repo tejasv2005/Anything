@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cola: The Dark Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --deep: #111111;
+    --card: #161616;
+    --cola: #8B1A1A;
+    --cola-light: #C0392B;
+    --amber: #D4A017;
+    --cream: #F5ECD7;
+    --muted: #888;
+    --border: rgba(255,255,255,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 60px 8vw;
+    position: relative;
+    background: radial-gradient(ellipse at 70% 30%, #3a0a0a 0%, var(--black) 65%);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: 'COLA';
+    position: absolute;
+    top: -0.05em;
+    right: -0.1em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(200px, 30vw, 480px);
+    color: rgba(139,26,26,0.08);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cola-light);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 100px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--cola-light);
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .hero-stat .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── LAYOUT ── */
+  .section {
+    padding: 80px 8vw;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cola-light);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 48px;
+  }
+
+  h2 em { font-style: italic; color: var(--cola-light); }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 48px;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(245,236,215,0.82);
+    margin-bottom: 20px;
+    max-width: 72ch;
+  }
+
+  strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--cream);
+    border-left: 3px solid var(--cola-light);
+    padding: 24px 40px;
+    margin: 56px 0;
+    background: rgba(139,26,26,0.07);
+    max-width: 70ch;
+  }
+
+  /* ── GRID CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+    margin: 48px 0;
+  }
+
+  .card {
+    background: var(--card);
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .card:hover { background: #1c1c1c; }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--cream);
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── BRAND TABLE ── */
+  .brand-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 48px 0;
+    font-size: 14px;
+  }
+
+  .brand-table th {
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .brand-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    color: rgba(245,236,215,0.8);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .brand-table tr:hover td { background: rgba(139,26,26,0.05); }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--cream);
+  }
+
+  .brand-tag {
+    display: inline-block;
+    background: rgba(139,26,26,0.3);
+    color: var(--cola-light);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-top: 4px;
+    border-radius: 2px;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px;
+    margin: 48px 0;
+  }
+
+  .stat-box {
+    background: var(--card);
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-box .big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--amber);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .stat-box .desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── NEURO BLOCK ── */
+  .neuro-block {
+    background: linear-gradient(135deg, rgba(139,26,26,0.15) 0%, rgba(10,10,10,0) 100%);
+    border: 1px solid rgba(192,57,43,0.2);
+    padding: 48px;
+    margin: 48px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neuro-block::before {
+    content: '⚗';
+    position: absolute;
+    right: 40px;
+    top: 30px;
+    font-size: 80px;
+    opacity: 0.05;
+  }
+
+  .neuro-block h3 {
+    margin-top: 0;
+    color: var(--cola-light);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin: 48px 0;
+    position: relative;
+    padding-left: 32px;
+    border-left: 2px solid rgba(139,26,26,0.4);
+  }
+
+  .timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--cola-light);
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    box-shadow: 0 0 0 2px rgba(192,57,43,0.3);
+  }
+
+  .timeline-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+
+  .timeline-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .timeline-item p {
+    font-size: 14px;
+    max-width: 60ch;
+    margin: 0;
+    color: rgba(245,236,215,0.7);
+  }
+
+  /* ── POINT OF SALE ── */
+  .pos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px;
+    margin: 40px 0;
+  }
+
+  .pos-item {
+    background: var(--card);
+    padding: 28px 24px;
+    border: 1px solid var(--border);
+  }
+
+  .pos-item .pos-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: rgba(139,26,26,0.4);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pos-item h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+
+  .pos-item p {
+    font-size: 13px;
+    margin: 0;
+    color: rgba(245,236,215,0.65);
+    line-height: 1.6;
+  }
+
+  /* ── DIET SECTION ── */
+  .diet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 40px 0;
+  }
+
+  @media(max-width: 640px) {
+    .diet-grid { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 24px; }
+  }
+
+  .diet-card {
+    background: var(--card);
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+  }
+
+  .diet-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--cream);
+  }
+
+  .diet-card p { font-size: 14px; margin: 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 48px 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: var(--muted);
+    max-width: none;
+    margin: 0;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.15em;
+    color: rgba(139,26,26,0.5);
+  }
+
+  /* ── VERDICT BOX ── */
+  .verdict {
+    background: rgba(139,26,26,0.12);
+    border: 1px solid rgba(192,57,43,0.3);
+    padding: 48px;
+    margin: 48px 0;
+  }
+
+  .verdict h3 {
+    color: var(--amber);
+    margin-top: 0;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  .verdict p { font-size: 16px; }
+
+  /* ── FADE IN ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .hero h1, .hero-meta { animation: fadeUp 0.8s ease both; }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero-meta { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Deep Dive Case Study · 2026</div>
+  <h1>Why the World <em>Drinks</em> the Dark Water</h1>
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="num">$243B</span>
+      <span class="label">Global CSD Market 2025</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">60.5%</span>
+      <span class="label">Cola Flavor Dominance</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">1.9B</span>
+      <span class="label">Coke servings daily</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">200+</span>
+      <span class="label">Countries. One flavor.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 1: THE MARKET -->
+<section class="section">
+  <div class="section-label">01 · The Market</div>
+  <h2>A $243 Billion Drink Built on<em> Carbonated Water & Syrup</em></h2>
+
+  <p>Strip any cola down to its chemistry — water, CO₂, caramel colouring, phosphoric acid, flavour concentrates, and sweeteners — and you're holding one of the cheapest concoctions in the food industry. Yet this $243 billion market doesn't just survive, it accelerates. <strong>Cola-flavoured beverages alone command 60.5% of the entire carbonated soft drink market in 2025.</strong> That number is not a coincidence. It is a manufactured outcome, engineered across chemistry, psychology, branding, and distribution. This case study dissects every layer without mystifying it.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="big">68%</span>
+      <span class="desc">Of all global CSD consumption is cola-based</span>
+    </div>
+    <div class="stat-box">
+      <span class="big">44.9%</span>
+      <span class="desc">Coke's US market share in carbonated soft drinks (2024)</span>
+    </div>
+    <div class="stat-box">
+      <span class="big">75%+</span>
+      <span class="desc">Households buy at least one carbonated beverage weekly</span>
+    </div>
+    <div class="stat-box">
+      <span class="big">4.7%</span>
+      <span class="desc">CAGR through 2034 — still growing in a "health era"</span>
+    </div>
+  </div>
+
+  <p>The market is not stagnant — it's actually defying health consciousness. Despite sugar taxes in France, graphic health warnings in the UK, and the GLP-1 drug revolution reshaping appetite, cola grows. Asia-Pacific is the fastest-growing region at a 6.21% CAGR, driven by urbanisation, rising disposable income, and the westernisation of food culture. North America dominates current consumption volume. And emerging markets — India, Latin America, Southeast Asia — are the battlegrounds where the next billion litres will be fought over.</p>
+
+  <div class="pull-quote">"The cola format is perhaps the most studied, most spent-on, most emotionally loaded consumable product in human commercial history — yet consumers think of it as just a drink."</div>
+</section>
+
+
+<!-- SECTION 2: THE BRANDS -->
+<section class="section">
+  <div class="section-label">02 · The Brand Landscape</div>
+  <h2>The Global Players — <em>Duopoly, Challengers & Local Emperors</em></h2>
+
+  <p>The cola world operates in three tiers: the entrenched global duopoly, the third-wheel challengers, and the ferociously loyal regional brands that often outsell Coke in their own home markets.</p>
+
+  <table class="brand-table">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>Origin / Parent</th>
+        <th>Global Posture</th>
+        <th>Key Edge</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="brand-name">Coca-Cola</div>
+          <span class="brand-tag">Global #1</span>
+        </td>
+        <td>Atlanta, 1886 · The Coca-Cola Company</td>
+        <td>200+ countries. $98B brand value. 1.9B daily servings. The default cola worldwide.</td>
+        <td>Distribution moat, brand mythology, 500+ sub-brand portfolio as strategic insurance</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Pepsi</div>
+          <span class="brand-tag">Global #2</span>
+        </td>
+        <td>North Carolina, 1898 · PepsiCo</td>
+        <td>PepsiCo's $92B revenue dwarfs Coke's top line — but Pepsi the cola brand is valued at just $17.7B vs Coke's $98B. Food is now PepsiCo's core business.</td>
+        <td>Sweeter taste profile, youth-facing cultural marketing, Lay's/Doritos cross-sell</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Keurig Dr Pepper</div>
+          <span class="brand-tag">Third Wheel</span>
+        </td>
+        <td>USA · Keurig Dr Pepper Inc.</td>
+        <td>Strong US presence. Dr Pepper is technically a "pepper" flavour — not pure cola — but occupies the same shelf and consumer occasion.</td>
+        <td>Flavour differentiation, loyal niche base, home brewing crossover via Keurig</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Thums Up</div>
+          <span class="brand-tag">India · Coke-owned</span>
+        </td>
+        <td>India, 1977 · Now Coca-Cola subsidiary</td>
+        <td>Dominates India with 16% market share vs Coke Classic's 9%. The defining case study of local taste defeating global brand.</td>
+        <td>Bolder, more carbonated, slightly bitter finish that Indian palates prefer over sweeter Western formulations</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Inca Kola</div>
+          <span class="brand-tag">Peru · Coke-owned</span>
+        </td>
+        <td>Peru, 1935 · Partially Coca-Cola</td>
+        <td>The only cola to have beaten Coca-Cola in its home market so decisively that Coke had to buy a 50% stake to survive. Bright yellow, banana-cream-adjacent flavour.</td>
+        <td>Cultural identity as product. Peruvians see it as national property. Pairs with ceviche and lomo saltado.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Campa Cola</div>
+          <span class="brand-tag">India Rising</span>
+        </td>
+        <td>India, 1970s revival · Reliance RCPL</td>
+        <td>Made ₹400 crore in 2024–25. IPL co-presenting sponsor in 2025, replacing Thums Up. Backed by Reliance's 15,000-store retail network and JioMart.</td>
+        <td>Price: 30–40% cheaper than Coke/Pepsi in large formats. Reliance distribution = unmatched tier-2/3 city penetration</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">RC Cola (Royal Crown)</div>
+          <span class="brand-tag">Value Challenger</span>
+        </td>
+        <td>USA · Keurig Dr Pepper / AJ Canfield</td>
+        <td>Massive in the Philippines, Southeast Asia, Eastern Europe. The brand of choice when Coke and Pepsi are too expensive.</td>
+        <td>Price-first positioning. Wider distribution in lower-income markets. Slightly sweeter than Coke.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Big Cola (AJE Group)</div>
+          <span class="brand-tag">Latin America / SE Asia</span>
+        </td>
+        <td>Peru · AJE Group</td>
+        <td>Operating across Latin America and Southeast Asia. Targets price-sensitive consumers in emerging markets — same playbook as Campa.</td>
+        <td>Aggressive pricing, large format containers, routes-to-market in informal retail that Coke's trucks can't reach</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Mecca-Cola / Qibla Cola</div>
+          <span class="brand-tag">Political Brand</span>
+        </td>
+        <td>France / UK · Independent</td>
+        <td>Positioned as the ethical alternative for Muslim consumers in the Middle East and diaspora markets. Pledges charity from each sale.</td>
+        <td>Identity-driven purchase. Consumers choose it as a political and values statement, not on taste.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Pakola / Volta (Pakistan)</div>
+          <span class="brand-tag">Regional Dominant</span>
+        </td>
+        <td>Pakistan, 1950s</td>
+        <td>240 million person market. National institution. The green bottle is iconic on the subcontinent.</td>
+        <td>Localised taste, cultural belonging, grassroots distribution through kirana stores</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="brand-name">Irn-Bru (Scotland), Julmust (Sweden)</div>
+          <span class="brand-tag">Seasonal / National</span>
+        </td>
+        <td>Scotland / Sweden</td>
+        <td>Julmust outsells Coke in Sweden during Christmas. Irn-Bru outpaced Coke in Scotland until 2005. National pride beverages that behave like colas in consumer psychology.</td>
+        <td>Cultural ownership at a national level. Governments and consumers treat these as social identity goods.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>A critical observation: Coca-Cola's strategy in markets where it loses — <strong>it buys</strong>. Thums Up, Inca Kola, and Limca were all independent winners that Coke acquired rather than beat. This is not weakness. It is the most intelligent distribution strategy in FMCG history: absorb the local champion and use your global logistics to scale it further while keeping the local flavour intact.</p>
+</section>
+
+
+<!-- SECTION 3: NEUROSCIENCE -->
+<section class="section">
+  <div class="section-label">03 · The Biology</div>
+  <h2>What Happens in the <em>Brain and Body</em> With Every Sip</h2>
+
+  <p>This is the part nobody puts in the marketing deck — but it is the actual engine of the entire industry. Cola is not popular because it tastes extraordinary. It is popular because it is neurochemically engineered to create a want-loop that is very difficult to interrupt once established.</p>
+
+  <div class="neuro-block">
+    <h3>The Three-Layer Hook</h3>
+    <p>According to Dr. Gary Wenk, Professor of Behavioural Neuroscience at Ohio State University, your favourite cola is engineered with precisely calibrated amounts of three agents that work synergistically:</p>
+
+    <h4 style="font-family:'Playfair Display',serif; font-size:18px; margin:28px 0 10px; color:var(--cream);">① Sugar → Dopamine Rush</h4>
+    <p>A standard 355ml can of Coca-Cola contains 39 grams of sugar — roughly 10 teaspoons, more than an adult's recommended daily intake in a single serving. That volume of sugar floods the nucleus accumbens — the brain's reward centre — with dopamine. The effect is rapid and euphoric, and it mirrors (at a milder intensity) what happens with drug-induced dopamine surges. The critical mechanics: the dopamine spike arrives fast and dissipates almost immediately, leaving the brain craving a return to that peak. This is the fundamental mechanism of habituation — not "I like it," but "I need another."</p>
+
+    <h4 style="font-family:'Playfair Display',serif; font-size:18px; margin:28px 0 10px; color:var(--cream);">② Caffeine → Dependency Layer</h4>
+    <p>Caffeine is the pharmaceutical backbone of cola loyalty. It blocks adenosine receptors — the chemicals that signal drowsiness — creating a lift in alertness and a mild sense of energy and optimism. Crucially, caffeine has its own independent ability to activate dopamine reward pathways, compounding the sugar hit. Consumed daily, the body builds tolerance. Miss a day, and adenosine floods in harder than normal, creating headaches, irritability, and "brain fog" — all classic withdrawal symptoms. This is not metaphor. It is pharmacology. Regular cola drinkers are, by definition, caffeine-dependent in a mild but very real sense.</p>
+
+    <h4 style="font-family:'Playfair Display',serif; font-size:18px; margin:28px 0 10px; color:var(--cream);">③ Carbonation → Amplifier</h4>
+    <p>This is the most underappreciated layer. Carbonation is not just texture — it is a delivery mechanism. When CO₂ dissolves in water it creates carbonic acid, which produces a trigeminal nerve response in the mouth: a simultaneous sensation of mild stinging, prickling, and cooling. This amplifies the perception of sweetness, creating a more intense euphoric hit than uncarbonated sugar water alone would produce. Wenk's research makes it explicit: <strong>carbonation often precedes sugar in addictive properties.</strong> A flat Coke is genuinely less addictive than a fresh one. The fizz is not cosmetic — it is functional.</p>
+  </div>
+
+  <div class="pull-quote">"The formula balances sweetness, caffeine stimulation, and carbonation into a combination engineered to maximise craving. That's the product. Not the taste. The craving."</div>
+
+  <p>There's a fourth, less-discussed factor: the fMRI studies (Neuron, 2004) showed that when subjects were shown the Coca-Cola logo before tasting the drink, entirely different brain regions activated compared to a blind taste test — regions associated with cultural memory, self-image, and social belonging. The brand imagery itself modifies the neurological experience of drinking. This means the "taste" of Coca-Cola is partially constructed in the prefrontal cortex, not just the tongue.</p>
+</section>
+
+
+<!-- SECTION 4: CONSUMER PSYCHOLOGY -->
+<section class="section">
+  <div class="section-label">04 · Consumer Psychology</div>
+  <h2>Why They Buy It <em>Knowing</em> What It Contains</h2>
+
+  <p>This is arguably the most fascinating dimension of the cola phenomenon: consumer awareness of the product's artificiality, its sugar content, its lack of nutritional value — and the continued, often accelerating, purchase behaviour despite that awareness. The research on this is clear and somewhat disturbing.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">🧠</span>
+      <h4>Cognitive Dissonance Management</h4>
+      <p>Most regular cola drinkers know it's "not healthy." But humans are extraordinarily skilled at compartmentalising inconvenient truths. The mind frames it as a "small pleasure," "a treat," or "my one vice" — rationalisation structures that neutralise guilt and preserve the behaviour. The brain doesn't eliminate the knowledge; it quarantines it away from the decision.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔁</span>
+      <h4>Habitual Loop Mechanics</h4>
+      <p>For most daily cola drinkers, the purchase is not a decision — it is a habit executed automatically. Cue (thirst, meal, break time) → Routine (reach for cola) → Reward (dopamine, refreshment, caffeine). Charles Duhigg's habit loop model maps perfectly onto soda behaviour. Breaking it requires restructuring the cue, not just willpower against the routine.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🍔</span>
+      <h4>Meal Pairing Conditioning</h4>
+      <p>Decades of fast food partnership — Coke flowing through every McDonald's, KFC, and Domino's point — have hard-wired cola into the sensory expectation of a "complete meal." For millions of people globally, the taste of cola is the completing note of the eating experience, the way chai is to a samosa. That pairing is deeply conditioned. Breaking it feels physically incomplete.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏷️</span>
+      <h4>Brand as Identity Proxy</h4>
+      <p>Choosing Coke over Pepsi, or Thums Up over Campa, is often a statement of identity — particularly among young urban consumers. The fMRI data confirms that brand imagery activates self-image regions in the brain. "I drink Coke" or "I only drink Thums Up" functions like a low-stakes identity badge, requiring minimal commitment but delivering belonging.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💊</span>
+      <h4>The "One Exception" Permission Structure</h4>
+      <p>As health consciousness rises, cola companies have benefited from a paradox: the more restrictive people are in their diets generally, the more emotionally loaded their "cheat" choice becomes. Cola is the canonical indulgence. It becomes the prize, not the default. This emotional loading actually increases the satisfaction and attachment.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🥤</span>
+      <h4>Temperature & Sensory Ritual</h4>
+      <p>Cold cola from a glass bottle or an ice-filled glass is a dramatically different sensory experience from room-temperature cola in plastic. The industry understands this — which is why vending machines, refrigerators at checkouts, and "best served ice cold" messaging are non-negotiable. The ritual of the cold, the sound of the can opening, the first hiss of carbonation — these are conditioned pleasure cues independent of the drink itself.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 5: DIET / ZERO -->
+<section class="section">
+  <div class="section-label">05 · The Diet Coke Phenomenon</div>
+  <h2>The Craze That Has Nothing to Do With <em>Health</em></h2>
+
+  <p>Diet Coke is perhaps the most psychologically complex product in the entire cola universe. It is artificially sweetened, zero-calorie, and — the product's own name says it — framed around deprivation. Yet it has developed a cult following that is arguably more intense and more emotionally attached than the Classic Coke fanbase. This requires a specific analysis.</p>
+
+  <div class="diet-grid">
+    <div class="diet-card">
+      <h4>Who Actually Drinks It</h4>
+      <p>Diet Coke's fan base is disproportionately female, urban, professional, and style-conscious. Victoria Beckham, Dua Lipa, Kate Moss (appointed creative director in 2022 at the brand's 40th anniversary), Karl Lagerfeld, Jean Paul Gaultier — these are not health advocates. They are fashion and cultural taste-makers. Donald Trump famously has a dedicated button for Diet Coke in his presidential office. The brand has positioned itself deep within the "it girl" cultural register, where it functions as a signal — not a health choice.</p>
+    </div>
+    <div class="diet-card">
+      <h4>The Aspartame Paradox</h4>
+      <p>Diet Coke's primary sweetener in the US is aspartame — an artificial compound with an ongoing and genuinely contested scientific record. A 2024 King's College London study found daily diet soda drinkers had a 31% higher risk of anxiety and depression. A 2025 Brazilian study linked artificial sweeteners to faster cognitive decline equivalent to 1.6 years of accelerated ageing. Yet loyal Diet Coke consumers know this — and continue. The product has successfully decoupled from its health claims entirely. It no longer needs them to sell.</p>
+    </div>
+    <div class="diet-card">
+      <h4>The TikTok Resurgence</h4>
+      <p>Diet Coke experienced a full cultural revival in 2023–24 driven by TikTok, where it became a chaotic, ironic, almost defiant identity symbol — a drink chosen precisely because it is camp, artificial, and "bad for you." The Diet Coke Girl aesthetic on social media is partly satirical, partly sincere, and entirely effective. As of 2025, despite Coca-Cola's own attempts to phase it out in favour of Coke Zero, loyal consumers have kept Diet Coke alive and selling at higher volumes than Zero in the US.</p>
+    </div>
+    <div class="diet-card">
+      <h4>Why Coke Zero Hasn't Replaced It</h4>
+      <p>Coke launched Zero Sugar in 2005 specifically because "diet" as a word was losing cultural cachet — especially with male consumers. Zero Sugar grew 14% globally in 2025 and is the company's preferred product. But Diet Coke has a distinct flavour formula (not a sugar-free version of Classic Coke, but a separate recipe entirely) and a distinct emotional identity. Its consumers are not drinking a substitute — they are drinking Diet Coke. Those are different things in the mind of the loyalist, and no amount of marketing can dissolve that distinction.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">"Diet Coke is the only product on the market where the customer knows the ingredient is controversial, knows the health claims are contested, knows the company would prefer they drink something else — and still chooses it, deliberately, as an act of identity."</div>
+</section>
+
+
+<!-- SECTION 6: POINTS OF SALE -->
+<section class="section">
+  <div class="section-label">06 · Distribution & Point of Sale</div>
+  <h2>Wherever Humans Are, <em>Cola Is Already There</em></h2>
+
+  <p>The most underrated competitive advantage in the cola industry is not the product — it is the distribution architecture. Coca-Cola's distribution system is studied in military strategy and logistics courses as an example of total-market penetration. The product is present not where consumers go to buy it, but in every environment where the desire to drink could occur.</p>
+
+  <div class="pos-grid">
+    <div class="pos-item">
+      <div class="pos-num">50%</div>
+      <h4>Supermarkets & Hypermarkets</h4>
+      <p>The primary volume driver globally. End-cap placement, refrigerated units at checkout, multi-pack pricing psychology, and loyalty card tie-ins make cola the highest-repurchase item in FMCG outside of staples.</p>
+    </div>
+    <div class="pos-item">
+      <div class="pos-num">20%</div>
+      <h4>Convenience Stores & Petrol Stations</h4>
+      <p>High-impulse, high-margin. The cold case at the counter is among the most profitable square feet in global retail. These locations capture the thirst-driven, unmotivated purchase — the drink you didn't plan to buy.</p>
+    </div>
+    <div class="pos-item">
+      <div class="pos-num">∞</div>
+      <h4>Fast Food & Restaurant Pouring Rights</h4>
+      <p>Exclusive pouring rights contracts with McDonald's, KFC, Burger King, Domino's, and thousands of independent restaurants mean Coke is the automatic default the moment you sit down. The consumer never makes an active choice — the choice is made for them.</p>
+    </div>
+    <div class="pos-item">
+      <div class="pos-num">15%</div>
+      <h4>E-Commerce (Growing Fast)</h4>
+      <p>Up from 8% in 2020, e-commerce now accounts for 15% of global CSD sales in 2025. Multi-pack subscriptions and algorithm-driven reorder reminders are emerging as a passive repurchase mechanism that requires zero consumer initiative.</p>
+    </div>
+    <div class="pos-item">
+      <div class="pos-num">22%↑</div>
+      <h4>Vending Machines & Smart Retail</h4>
+      <p>Smart vending machines with AI-powered personalisation grew 22% in urban regions globally in 2023. These units are programmed for psychological friction reduction — a tap, a scan, and you have a cold cola in 8 seconds. No queue, no conversation, no decision-making effort.</p>
+    </div>
+    <div class="pos-item">
+      <div class="pos-num">Kirana</div>
+      <h4>Informal Retail (India / Global South)</h4>
+      <p>In India, over 12 million kirana (neighbourhood) stores are the frontline of cola distribution. Pre-chilled units funded by Coke and Pepsi sit at the counter. The local retailer becomes a brand ambassador by default — his fridge runs on Coke's money, and its contents are curated accordingly.</p>
+    </div>
+  </div>
+
+  <p>The deeper strategy is what marketers call <strong>Share of Throat</strong> — not market share of shelf, but active occupation of every moment in which a human being might be thirsty. The goal is not to win when you're compared to alternatives. The goal is to be there before the comparison ever happens.</p>
+</section>
+
+
+<!-- SECTION 7: BRAND STRATEGY DISSECTION -->
+<section class="section">
+  <div class="section-label">07 · Brand Strategy</div>
+  <h2>How They Sell <em>Coloured Sugar Water</em> at a Premium, Forever</h2>
+
+  <p>The supreme achievement of both Coca-Cola and Pepsi is this: they have made consumers feel that a formula of carbonated water, caramel colour, phosphoric acid, and flavour concentrate is <em>irreplaceable</em>. That is the result of deliberate, sustained, multi-decade brand architecture. Here is how it works at the structural level.</p>
+
+  <h3>The Proprietary Secret as Mythology</h3>
+  <p>Coke's formula — "Merchandise 7X" — is supposedly known to only two executives at any given time, and is stored in a vault at the World of Coca-Cola museum in Atlanta. This story is, functionally, marketing. The formula has been reverse-engineered and approximated many times. But the myth of the unknowable formula creates the illusion that what you are drinking cannot be replicated — that it is unique in a way that, say, your filtered water is not. Scarcity of knowledge is a substitute for actual scarcity.</p>
+
+  <h3>Emotional Territory Ownership</h3>
+  <p>Both Coke and Pepsi have spent decades not advertising a product but advertising an emotional state — and they've done so with enough consistency that those states now trigger automatic associations. Coke owns: togetherness, warmth, universal human connection. Pepsi owns: youth, rebellion, challenge the establishment. These territories are chosen not arbitrarily but because they are universal — every human on Earth is a potential buyer, so the emotional triggers must be cross-cultural. The product is a vessel; the emotion is the real sell.</p>
+
+  <h3>Sports & Events as Permanent Penetration</h3>
+  <p>Coca-Cola's partnerships with the Olympics and FIFA World Cup are not just sponsorships — they are acts of cultural embedding. When billions of people watch a global human moment, and Coke is visually present, the brand gets associated not with the product but with the emotion of the event. Over decades, these associations layer and solidify. You don't consciously remember every World Cup Coke ad. But your brain has accumulated thousands of data points linking Coke to celebration, peak moments, and belonging.</p>
+
+  <h3>The Localisation Playbook</h3>
+  <p>The strategic genius the duopoly has displayed in markets like India is instructive. Rather than forcing Classic Coke on a market that preferred Thums Up's stronger, more bitter carbonation — Coke bought Thums Up and ran it as a separate brand with its own identity, while quietly leveraging Coke's global bottling and distribution infrastructure. The consumer got their preferred product. Coke got the volume and margin. Localisation without abandoning central control.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">1886</div>
+      <h4>The Original Formula Contains Cocaine</h4>
+      <p>Coca-Cola was created by pharmacist John Pemberton and literally contained cocaine from coca leaf extract and caffeine from kola nuts. It was sold as a medicinal tonic. The cocaine was removed around 1903, but the neurochemical delivery mechanisms — caffeine and sugar — remained and were refined.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1977</div>
+      <h4>Coca-Cola Leaves India — Thums Up Is Born</h4>
+      <p>Forced out by the Indian government's demand to share its formula, Coke exits. Thums Up, Campa Cola, and Limca fill the vacuum and build 15 years of domestic loyalty. When Coke returns in 1993, it acquires Thums Up rather than try to outcompete it. A masterclass in market re-entry via acquisition.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1982</div>
+      <h4>Diet Coke Launches</h4>
+      <p>The first major extension of the Coke brand, and the first cola to separate the product from the taste of the original. Goes on to become the world's third best-selling soft drink. Defines a category — diet cola — that eventually breeds Coke Zero, Pepsi Max, and zero-sugar variants across every major brand.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1985</div>
+      <h4>New Coke — The Greatest Failure That Proved Brand Power</h4>
+      <p>When Coke changed its formula, consumers revolted — not because New Coke tasted worse (in blind tests, many preferred it) but because the original Coke had become an identity object. The emotional attachment to the brand was stronger than the actual sensory preference. Coke Classic returned within 77 days. The event confirmed that cola loyalty is psychological, not flavour-based.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <h4>Campa Cola Challenges the Duopoly in India</h4>
+      <p>Backed by Reliance, Campa Cola becomes IPL co-presenting sponsor, replacing Thums Up. Sells large-format bottles at 30–40% below Coke/Pepsi pricing. Makes ₹400 crore in its first full fiscal year. The playbook: price disruption + distribution infrastructure + national brand recognition. The same formula Jio used to break the telecom duopoly.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 8: VERDICT -->
+<section class="section">
+  <div class="section-label">08 · Synthesis</div>
+  <h2>The Actual Answer: <em>Why Does Cola Win?</em></h2>
+
+  <div class="verdict">
+    <h3>The Honest Breakdown</h3>
+    <p>Cola is popular not because people don't know what's in it — but because what's in it has been precisely engineered to make the brain want more of it, the body feel incomplete without it, and the culture treat it as a social object. The awareness of its artificiality does almost nothing to reduce consumption, because the purchasing decision is rarely made in the rational, informed part of the brain. It's made in habit, in craving, in identity, and in the 3-second window at the checkout counter where the cold case is right in front of you.</p>
+    <p>Diet Coke's continued dominance despite contested science is the clearest proof: consumers have moved past justification entirely. They drink it because it is their thing — an identity object that happens to be a drink. The fact that it contains artificial sweeteners is now almost a feature, not a bug — a badge of not caring what the health discourse says.</p>
+    <p>The major brands win through five overlapping mechanisms that reinforce each other in a closed loop:</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">🧬</span>
+      <h4>Neurochemical Engineering</h4>
+      <p>Sugar + caffeine + carbonation creates a genuine, measurable want-loop via dopamine. The product is physically habituating. This is not marketing spin — it is pharmacology applied to food.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏪</span>
+      <h4>Total Distribution Saturation</h4>
+      <p>Cola is present before the desire forms. Fridges at every checkout, vending machines in every corridor, pouring rights at every meal occasion. The competition never gets a chance to be chosen because it isn't there when the decision window opens.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎭</span>
+      <h4>Identity Branding at Scale</h4>
+      <p>Brand preference is linked to self-image, peer identity, and cultural belonging. Choosing a cola is a low-effort identity statement — and humans make thousands of these daily without realising it.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔗</span>
+      <h4>Meal Occasion Lock-In</h4>
+      <p>Decades of pairing with food has made cola the contextually expected beverage at mealtimes for hundreds of millions. The expectation is now cultural, not individual.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌍</span>
+      <h4>Local Adaptation as Global Control</h4>
+      <p>Where the global brand loses on taste, it buys the local winner. Where it loses on price, it doesn't reduce margin — it waits. The duopoly plays a very long game, and its patience is funded by $243 billion in annual global revenue.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">"The product doesn't need to be extraordinary. It needs to be present, habituating, identity-linked, and culturally embedded. Cola has been all four things, simultaneously, for 140 years."</div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Case Study compiled May 2026 · Data sources: Grand View Research, Fortune Business Insights, Statista, Wikipedia, OSU Neuroscience Dept., King's College London (2024), CNN Health, Finnovate India, The Street Food Guy</p>
+  <div class="footer-brand">COLA: THE DARK STUDY</div>
+</div>
+
+</body>
+</html>
